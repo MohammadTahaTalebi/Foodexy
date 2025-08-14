@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;         
+  --background-secondry: #fff7ed;
+  --foreground: #1f2937;      
+  --primary: #f97316;        
+  --secondary: #f59e0b;     
+  --muted: #f3f4f6;         
+  --muted-foreground: #6b7280;   
+  --border: #fed7aa;             
+  --card-foreground: #1f2937; 
+}
+
+.dark {
+  --background: #1a1a1a;
+  --background-secondry: #2a2a2a;
+  --foreground: #e5e7eb;
+  --primary: #f97316;
+  --secondary: #f59e0b;
+  --muted: #3d3d3d;
+  --muted-foreground: #9ca3af;
+  --border: #4b5563;
+  --card-foreground: #f3f4f6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-secondry: var(--background-secondry);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+@keyframes float {
+  0%, 100% { transform: translateY(8px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+

@@ -1,0 +1,41 @@
+import { ThemeProvider } from "@/components/common/ThemeProvider";
+import "@fontsource/vazirmatn/400.css";  
+import "@fontsource/vazirmatn/700.css";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Foodexy",
+  description: "Bringing Delicious Meals To Your Doorstep",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} vazirmatn antialiased`}
+        style={{ fontFamily: "'Vazirmatn', sans-serif" }}
+      >
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
