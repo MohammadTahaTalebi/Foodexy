@@ -316,29 +316,31 @@ exports.Prisma.FoodScalarFieldEnum = {
   id: 'id',
   name: 'name',
   desc: 'desc',
-  Star: 'Star',
-  Price: 'Price',
+  star: 'star',
+  price: 'price',
   createdAt: 'createdAt',
   category: 'category',
   image: 'image',
-  shopId: 'shopId'
+  shopId: 'shopId',
+  created_at: 'created_at'
 };
 
 exports.Prisma.RestaurantsScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  image: 'image'
+  image: 'image',
+  ownerId: 'ownerId',
+  created_at: 'created_at'
 };
 
 exports.Prisma.CommentsScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   msg: 'msg',
   rating: 'rating',
-  date: 'date',
-  avatar: 'avatar',
   foodId: 'foodId',
-  userId: 'userId'
+  userId: 'userId',
+  created_at: 'created_at',
+  title: 'title'
 };
 
 exports.Prisma.SortOrder = {
@@ -399,6 +401,15 @@ exports.aal_level = exports.$Enums.aal_level = {
   aal1: 'aal1',
   aal2: 'aal2',
   aal3: 'aal3'
+};
+
+exports.Category = exports.$Enums.Category = {
+  PASTA: 'PASTA',
+  SUSHI: 'SUSHI',
+  PIZZA: 'PIZZA',
+  BURGER: 'BURGER',
+  DESSERT: 'DESSERT',
+  DRINK: 'DRINK'
 };
 
 exports.Prisma.ModelName = {

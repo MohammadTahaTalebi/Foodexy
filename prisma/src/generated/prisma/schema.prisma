@@ -323,10 +323,53 @@ model users {
   mfa_factors                 mfa_factors[]
   one_time_tokens             one_time_tokens[]
   sessions                    sessions[]
+  Comments                    Comments[]
 
   @@index([instance_id])
   @@index([is_anonymous])
   @@schema("auth")
+}
+
+model Food {
+  id         Int         @id @default(autoincrement())
+  name       String
+  desc       String
+  star       Float       @default(0)
+  price      Float
+  createdAt  DateTime    @default(now())
+  category   Category
+  image      String
+  shopId     Int
+  created_at DateTime    @default(now())
+  comments   Comments[]
+  shop       Restaurants @relation(fields: [shopId], references: [id])
+
+  @@schema("public")
+}
+
+model Restaurants {
+  id         Int      @id @default(autoincrement())
+  name       String
+  image      String
+  ownerId    String   @db.Uuid
+  created_at DateTime @default(now())
+  foods      Food[]
+
+  @@schema("public")
+}
+
+model Comments {
+  id         Int      @id @default(autoincrement())
+  msg        String
+  rating     Int
+  foodId     Int
+  userId     String   @db.Uuid
+  created_at DateTime @default(now())
+  title      String
+  food       Food     @relation(fields: [foodId], references: [id])
+  user       users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@schema("public")
 }
 
 enum aal_level {
@@ -370,41 +413,13 @@ enum one_time_token_type {
   @@schema("auth")
 }
 
-model Food {
-  id        Int         @id @default(autoincrement())
-  name      String
-  desc      String
-  Star      Int
-  Price     Float
-  createdAt DateTime    @default(now())
-  category  Int
-  image     String
-  shopId    Int
-  shop      Restaurants @relation(fields: [shopId], references: [id])
-  comments  Comments[]
-
-  @@schema("public")
-}
-
-model Restaurants {
-  id    Int    @id @default(autoincrement())
-  name  String
-  image String
-  foods Food[]
-
-  @@schema("public")
-}
-
-model Comments {
-  id     Int      @id @default(autoincrement())
-  name   String
-  msg    String
-  rating Int
-  date   DateTime
-  avatar String
-  foodId Int
-  userId String   @db.Uuid
-  food   Food     @relation(fields: [foodId], references: [id])
+enum Category {
+  PASTA
+  SUSHI
+  PIZZA
+  BURGER
+  DESSERT
+  DRINK
 
   @@schema("public")
 }
