@@ -2,13 +2,23 @@ import { Star } from "lucide-react";
 import Image from "next/image";
 import { Food, Restaurants } from "../../../prisma/src/generated/prisma";
 import Link from "next/link";
+import { FaHamburger, FaLeaf, FaIceCream, FaGlassMartiniAlt } from "react-icons/fa";
 
 interface FoodCardProps {
   food: Food & { shop: Restaurants };
   onAddToCart?: () => void;
 }
 
+const categoryMap: Record<number, { name: string; icon: JSX.Element }> = {
+  1: { name: "Fast Food", icon: <FaHamburger className="w-4 h-4" /> },
+  2: { name: "Salads", icon: <FaLeaf className="w-4 h-4" /> },
+  3: { name: "Desserts", icon: <FaIceCream className="w-4 h-4" /> },
+  4: { name: "Drinks", icon: <FaGlassMartiniAlt className="w-4 h-4" /> },
+};
+
 export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
+  const category = categoryMap[food.category];
+
   return (
     <div className="!w-full bg-background-secondry rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-border group">
       <div className="relative w-full h-60 overflow-hidden rounded-2xl group">
@@ -17,15 +27,14 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
           alt={food.name}
           width={1080}
           height={1080}
-          className="w-full h-full  transform transition-transform duration-300 group-hover:scale-105"
+          className="w-full h-full transform transition-transform duration-300 group-hover:scale-105"
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
 
-        <div className="absolute top-3 left-3 bg-primary/90 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-2 select-none">
-          {/* TODO: CATEGORY ICON */}
-          {/* {category} */}
-          <span>{food.category}</span>
+        <div className="absolute top-3 left-3 bg-primary/90 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 select-none">
+          {category?.icon}
+          <span>{category?.name}</span>
         </div>
       </div>
       <div className="p-6 flex flex-col gap-2">
@@ -65,12 +74,12 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
               className="w-6 h-6 rounded-full object-cover border border-border"
               loading="lazy"
             />
-            <span className=" text-card-foreground font-bold hover:text-primary">
+            <span className="text-card-foreground font-bold hover:text-primary">
               {food.shop.name}
             </span>
           </div>
           <div className="text-secondary font-bold text-xl">
-            {food.price.toLocaleString("en-US")}&nbsp;$
+            {food.Price}$
           </div>
         </div>
 

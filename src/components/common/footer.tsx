@@ -31,7 +31,7 @@ const socialLinks = [
 
 export default function Footer() {
     return (
-        <footer className="bg-background-secondry text-foreground py-10 px-4 sm:px-6 md:px-10 lg:px-20">
+        <footer className="bg-background-secondry border-t border-border text-foreground py-10 px-4 sm:px-6 md:px-10 lg:px-20">
             <div className="max-w-7xl mx-auto grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
                 <div className="xs:col-span-2 md:col-span-1 flex flex-col items-center md:items-start">
                     <h1 className="text-3xl font-bold text-primary mb-3">Foodexy</h1>
