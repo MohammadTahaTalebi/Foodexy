@@ -1,3 +1,5 @@
+import CommentForm from "@/components/CommentForm";
+import { getFoodComments } from "@/lib/actions/comments.action";
 import {
   getFoodById,
   getFromThisShop,
@@ -44,6 +46,7 @@ export default async function FoodDetailPage({ params }: FoodPageProps) {
   }
   const fromThisShop = await getFromThisShop(food.id, food.shopId);
   const similarFoods = await getSimilarFoods(food.id, food.category);
+  const comments = await getFoodComments(food.id);
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-12">
       {/* ===================== FOOD DETAIL ===================== */}
@@ -67,7 +70,7 @@ export default async function FoodDetailPage({ params }: FoodPageProps) {
             <span className="text-muted-foreground">(120 reviews)</span>
           </div>
           <p className="text-muted-foreground">{food?.desc}</p>
-          <p className="text-2xl font-bold text-primary">{food.price}$</p>
+          <p className="text-2xl font-bold text-primary">${food.price}</p>
 
           <button className="bg-primary text-white px-6 py-3 rounded-xl hover:opacity-90 transition">
             Add to Cart
@@ -80,40 +83,25 @@ export default async function FoodDetailPage({ params }: FoodPageProps) {
         <h2 className="text-2xl font-bold mb-4">Customer Reviews</h2>
         <div className="space-y-6">
           {/* Example comment */}
-          <div className="bg-background-secondry border border-border p-4 rounded-xl">
-            <div className="flex items-center justify-between">
-              <span className="font-medium">John Doe</span>
-              <div className="flex items-center gap-1">
-                <Star className="w-4 h-4 text-primary" />
-                <span>5</span>
+          {comments.map((item) => (
+            <div
+              key={item.id}
+              className="bg-background-secondry border border-border p-4 rounded-xl"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-medium">{item.user.email}</span>
+                <div className="flex items-center gap-1">
+                  <Star className="w-4 h-4 text-primary" />
+                  <span>{item.rating}</span>
+                </div>
               </div>
+              <p className="text-muted-foreground mt-2">{item.msg}</p>
             </div>
-            <p className="text-muted-foreground mt-2">
-              Absolutely loved it! The flavors were spot on.
-            </p>
-          </div>
+          ))}
         </div>
 
         {/* Submit comment */}
-        <form className="mt-6 space-y-4">
-          <textarea
-            placeholder="Write your review..."
-            className="w-full p-3 rounded-lg border border-border bg-background"
-          />
-          <div className="flex items-center gap-4">
-            <select className="border border-border rounded-lg p-2 bg-background">
-              <option value="">Rating</option>
-              <option value="5">⭐⭐⭐⭐⭐</option>
-              <option value="4">⭐⭐⭐⭐</option>
-              <option value="3">⭐⭐⭐</option>
-              <option value="2">⭐⭐</option>
-              <option value="1">⭐</option>
-            </select>
-            <button className="bg-primary text-white px-6 py-3 rounded-xl hover:opacity-90 transition">
-              Submit Review
-            </button>
-          </div>
-        </form>
+        <CommentForm foodId={food.id} />
       </section>
 
       {/* ===================== RELATED FOOD ===================== */}
