@@ -23167,7 +23167,6 @@ export namespace Prisma {
     foodId: number | null
     userId: string | null
     created_at: Date | null
-    title: string | null
   }
 
   export type CommentsMaxAggregateOutputType = {
@@ -23177,7 +23176,6 @@ export namespace Prisma {
     foodId: number | null
     userId: string | null
     created_at: Date | null
-    title: string | null
   }
 
   export type CommentsCountAggregateOutputType = {
@@ -23187,7 +23185,6 @@ export namespace Prisma {
     foodId: number
     userId: number
     created_at: number
-    title: number
     _all: number
   }
 
@@ -23211,7 +23208,6 @@ export namespace Prisma {
     foodId?: true
     userId?: true
     created_at?: true
-    title?: true
   }
 
   export type CommentsMaxAggregateInputType = {
@@ -23221,7 +23217,6 @@ export namespace Prisma {
     foodId?: true
     userId?: true
     created_at?: true
-    title?: true
   }
 
   export type CommentsCountAggregateInputType = {
@@ -23231,7 +23226,6 @@ export namespace Prisma {
     foodId?: true
     userId?: true
     created_at?: true
-    title?: true
     _all?: true
   }
 
@@ -23328,7 +23322,6 @@ export namespace Prisma {
     foodId: number
     userId: string
     created_at: Date
-    title: string
     _count: CommentsCountAggregateOutputType | null
     _avg: CommentsAvgAggregateOutputType | null
     _sum: CommentsSumAggregateOutputType | null
@@ -23357,7 +23350,6 @@ export namespace Prisma {
     foodId?: boolean
     userId?: boolean
     created_at?: boolean
-    title?: boolean
     food?: boolean | FoodDefaultArgs<ExtArgs>
     user?: boolean | usersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comments"]>
@@ -23369,7 +23361,6 @@ export namespace Prisma {
     foodId?: boolean
     userId?: boolean
     created_at?: boolean
-    title?: boolean
     food?: boolean | FoodDefaultArgs<ExtArgs>
     user?: boolean | usersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comments"]>
@@ -23381,7 +23372,6 @@ export namespace Prisma {
     foodId?: boolean
     userId?: boolean
     created_at?: boolean
-    title?: boolean
     food?: boolean | FoodDefaultArgs<ExtArgs>
     user?: boolean | usersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comments"]>
@@ -23393,10 +23383,9 @@ export namespace Prisma {
     foodId?: boolean
     userId?: boolean
     created_at?: boolean
-    title?: boolean
   }
 
-  export type CommentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "msg" | "rating" | "foodId" | "userId" | "created_at" | "title", ExtArgs["result"]["comments"]>
+  export type CommentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "msg" | "rating" | "foodId" | "userId" | "created_at", ExtArgs["result"]["comments"]>
   export type CommentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     food?: boolean | FoodDefaultArgs<ExtArgs>
     user?: boolean | usersDefaultArgs<ExtArgs>
@@ -23423,7 +23412,6 @@ export namespace Prisma {
       foodId: number
       userId: string
       created_at: Date
-      title: string
     }, ExtArgs["result"]["comments"]>
     composites: {}
   }
@@ -23855,7 +23843,6 @@ export namespace Prisma {
     readonly foodId: FieldRef<"Comments", 'Int'>
     readonly userId: FieldRef<"Comments", 'String'>
     readonly created_at: FieldRef<"Comments", 'DateTime'>
-    readonly title: FieldRef<"Comments", 'String'>
   }
     
 
@@ -24557,8 +24544,7 @@ export namespace Prisma {
     rating: 'rating',
     foodId: 'foodId',
     userId: 'userId',
-    created_at: 'created_at',
-    title: 'title'
+    created_at: 'created_at'
   };
 
   export type CommentsScalarFieldEnum = (typeof CommentsScalarFieldEnum)[keyof typeof CommentsScalarFieldEnum]
@@ -26176,7 +26162,6 @@ export namespace Prisma {
     foodId?: IntFilter<"Comments"> | number
     userId?: UuidFilter<"Comments"> | string
     created_at?: DateTimeFilter<"Comments"> | Date | string
-    title?: StringFilter<"Comments"> | string
     food?: XOR<FoodScalarRelationFilter, FoodWhereInput>
     user?: XOR<UsersScalarRelationFilter, usersWhereInput>
   }
@@ -26188,7 +26173,6 @@ export namespace Prisma {
     foodId?: SortOrder
     userId?: SortOrder
     created_at?: SortOrder
-    title?: SortOrder
     food?: FoodOrderByWithRelationInput
     user?: usersOrderByWithRelationInput
   }
@@ -26203,7 +26187,6 @@ export namespace Prisma {
     foodId?: IntFilter<"Comments"> | number
     userId?: UuidFilter<"Comments"> | string
     created_at?: DateTimeFilter<"Comments"> | Date | string
-    title?: StringFilter<"Comments"> | string
     food?: XOR<FoodScalarRelationFilter, FoodWhereInput>
     user?: XOR<UsersScalarRelationFilter, usersWhereInput>
   }, "id">
@@ -26215,7 +26198,6 @@ export namespace Prisma {
     foodId?: SortOrder
     userId?: SortOrder
     created_at?: SortOrder
-    title?: SortOrder
     _count?: CommentsCountOrderByAggregateInput
     _avg?: CommentsAvgOrderByAggregateInput
     _max?: CommentsMaxOrderByAggregateInput
@@ -26233,7 +26215,6 @@ export namespace Prisma {
     foodId?: IntWithAggregatesFilter<"Comments"> | number
     userId?: UuidWithAggregatesFilter<"Comments"> | string
     created_at?: DateTimeWithAggregatesFilter<"Comments"> | Date | string
-    title?: StringWithAggregatesFilter<"Comments"> | string
   }
 
   export type audit_log_entriesCreateInput = {
@@ -27769,7 +27750,6 @@ export namespace Prisma {
     msg: string
     rating: number
     created_at?: Date | string
-    title: string
     food: FoodCreateNestedOneWithoutCommentsInput
     user: usersCreateNestedOneWithoutCommentsInput
   }
@@ -27781,14 +27761,12 @@ export namespace Prisma {
     foodId: number
     userId: string
     created_at?: Date | string
-    title: string
   }
 
   export type CommentsUpdateInput = {
     msg?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
     food?: FoodUpdateOneRequiredWithoutCommentsNestedInput
     user?: usersUpdateOneRequiredWithoutCommentsNestedInput
   }
@@ -27800,7 +27778,6 @@ export namespace Prisma {
     foodId?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentsCreateManyInput = {
@@ -27810,14 +27787,12 @@ export namespace Prisma {
     foodId: number
     userId: string
     created_at?: Date | string
-    title: string
   }
 
   export type CommentsUpdateManyMutationInput = {
     msg?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentsUncheckedUpdateManyInput = {
@@ -27827,7 +27802,6 @@ export namespace Prisma {
     foodId?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type UuidNullableFilter<$PrismaModel = never> = {
@@ -29189,7 +29163,6 @@ export namespace Prisma {
     foodId?: SortOrder
     userId?: SortOrder
     created_at?: SortOrder
-    title?: SortOrder
   }
 
   export type CommentsAvgOrderByAggregateInput = {
@@ -29205,7 +29178,6 @@ export namespace Prisma {
     foodId?: SortOrder
     userId?: SortOrder
     created_at?: SortOrder
-    title?: SortOrder
   }
 
   export type CommentsMinOrderByAggregateInput = {
@@ -29215,7 +29187,6 @@ export namespace Prisma {
     foodId?: SortOrder
     userId?: SortOrder
     created_at?: SortOrder
-    title?: SortOrder
   }
 
   export type CommentsSumOrderByAggregateInput = {
@@ -32278,7 +32249,6 @@ export namespace Prisma {
     msg: string
     rating: number
     created_at?: Date | string
-    title: string
     food: FoodCreateNestedOneWithoutCommentsInput
   }
 
@@ -32288,7 +32258,6 @@ export namespace Prisma {
     rating: number
     foodId: number
     created_at?: Date | string
-    title: string
   }
 
   export type CommentsCreateOrConnectWithoutUserInput = {
@@ -32454,14 +32423,12 @@ export namespace Prisma {
     foodId?: IntFilter<"Comments"> | number
     userId?: UuidFilter<"Comments"> | string
     created_at?: DateTimeFilter<"Comments"> | Date | string
-    title?: StringFilter<"Comments"> | string
   }
 
   export type CommentsCreateWithoutFoodInput = {
     msg: string
     rating: number
     created_at?: Date | string
-    title: string
     user: usersCreateNestedOneWithoutCommentsInput
   }
 
@@ -32471,7 +32438,6 @@ export namespace Prisma {
     rating: number
     userId: string
     created_at?: Date | string
-    title: string
   }
 
   export type CommentsCreateOrConnectWithoutFoodInput = {
@@ -33176,7 +33142,6 @@ export namespace Prisma {
     rating: number
     foodId: number
     created_at?: Date | string
-    title: string
   }
 
   export type identitiesUpdateWithoutUsersInput = {
@@ -33330,7 +33295,6 @@ export namespace Prisma {
     msg?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
     food?: FoodUpdateOneRequiredWithoutCommentsNestedInput
   }
 
@@ -33340,7 +33304,6 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     foodId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentsUncheckedUpdateManyWithoutUserInput = {
@@ -33349,7 +33312,6 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     foodId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentsCreateManyFoodInput = {
@@ -33358,14 +33320,12 @@ export namespace Prisma {
     rating: number
     userId: string
     created_at?: Date | string
-    title: string
   }
 
   export type CommentsUpdateWithoutFoodInput = {
     msg?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
     user?: usersUpdateOneRequiredWithoutCommentsNestedInput
   }
 
@@ -33375,7 +33335,6 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentsUncheckedUpdateManyWithoutFoodInput = {
@@ -33384,7 +33343,6 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
   }
 
   export type FoodCreateManyShopInput = {

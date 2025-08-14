@@ -365,7 +365,6 @@ model Comments {
   foodId     Int
   userId     String   @db.Uuid
   created_at DateTime @default(now())
-  title      String
   food       Food     @relation(fields: [foodId], references: [id])
   user       users    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
