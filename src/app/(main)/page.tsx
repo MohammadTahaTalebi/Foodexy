@@ -151,7 +151,7 @@ export default async function HomePage() {
 
         <div className="grid max-[400px]:grid-cols-1 max-[768px]:grid-cols-2 md:grid-cols-4 justify-between gap-8 mx-auto">
           {categories.map((cat) => (
-            <Link href={cat.url}>
+            <Link key={cat.name} href={cat.url}>
               <div
                 key={cat.name}
                 className="bg-background rounded-2xl md:w-full shadow-lg p-8 flex flex-col items-center justify-center cursor-pointer transition-transform duration-700 ease-in-out hover:scale-105 hover:shadow-2xl group"

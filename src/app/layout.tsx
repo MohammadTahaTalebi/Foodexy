@@ -1,6 +1,4 @@
 import { ThemeProvider } from "@/components/common/ThemeProvider";
-import "@fontsource/vazirmatn/400.css";  
-import "@fontsource/vazirmatn/700.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -28,11 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} vazirmatn antialiased`}
-        style={{ fontFamily: "'Vazirmatn', sans-serif" }}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>
