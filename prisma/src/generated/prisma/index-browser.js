@@ -339,8 +339,7 @@ exports.Prisma.CommentsScalarFieldEnum = {
   rating: 'rating',
   foodId: 'foodId',
   userId: 'userId',
-  created_at: 'created_at',
-  title: 'title'
+  created_at: 'created_at'
 };
 
 exports.Prisma.SortOrder = {
