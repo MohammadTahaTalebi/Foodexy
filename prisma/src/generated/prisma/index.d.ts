@@ -2943,6 +2943,7 @@ export namespace Prisma {
     one_time_tokens: number
     sessions: number
     Comments: number
+    ShoppingCart: number
   }
 
   export type UsersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2951,6 +2952,7 @@ export namespace Prisma {
     one_time_tokens?: boolean | UsersCountOutputTypeCountOne_time_tokensArgs
     sessions?: boolean | UsersCountOutputTypeCountSessionsArgs
     Comments?: boolean | UsersCountOutputTypeCountCommentsArgs
+    ShoppingCart?: boolean | UsersCountOutputTypeCountShoppingCartArgs
   }
 
   // Custom InputTypes
@@ -2997,6 +2999,13 @@ export namespace Prisma {
    */
   export type UsersCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommentsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountShoppingCartArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ShoppingCartWhereInput
   }
 
 
@@ -19892,6 +19901,7 @@ export namespace Prisma {
     one_time_tokens?: boolean | users$one_time_tokensArgs<ExtArgs>
     sessions?: boolean | users$sessionsArgs<ExtArgs>
     Comments?: boolean | users$CommentsArgs<ExtArgs>
+    ShoppingCart?: boolean | users$ShoppingCartArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["users"]>
 
@@ -20016,6 +20026,7 @@ export namespace Prisma {
     one_time_tokens?: boolean | users$one_time_tokensArgs<ExtArgs>
     sessions?: boolean | users$sessionsArgs<ExtArgs>
     Comments?: boolean | users$CommentsArgs<ExtArgs>
+    ShoppingCart?: boolean | users$ShoppingCartArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type usersIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -20029,6 +20040,7 @@ export namespace Prisma {
       one_time_tokens: Prisma.$one_time_tokensPayload<ExtArgs>[]
       sessions: Prisma.$sessionsPayload<ExtArgs>[]
       Comments: Prisma.$CommentsPayload<ExtArgs>[]
+      ShoppingCart: Prisma.$ShoppingCartPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       instance_id: string | null
@@ -20465,6 +20477,7 @@ export namespace Prisma {
     one_time_tokens<T extends users$one_time_tokensArgs<ExtArgs> = {}>(args?: Subset<T, users$one_time_tokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$one_time_tokensPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends users$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, users$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Comments<T extends users$CommentsArgs<ExtArgs> = {}>(args?: Subset<T, users$CommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ShoppingCart<T extends users$ShoppingCartArgs<ExtArgs> = {}>(args?: Subset<T, users$ShoppingCartArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ShoppingCartPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21034,6 +21047,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
+  }
+
+  /**
+   * users.ShoppingCart
+   */
+  export type users$ShoppingCartArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ShoppingCart
+     */
+    select?: ShoppingCartSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ShoppingCart
+     */
+    omit?: ShoppingCartOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShoppingCartInclude<ExtArgs> | null
+    where?: ShoppingCartWhereInput
+    orderBy?: ShoppingCartOrderByWithRelationInput | ShoppingCartOrderByWithRelationInput[]
+    cursor?: ShoppingCartWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ShoppingCartScalarFieldEnum | ShoppingCartScalarFieldEnum[]
   }
 
   /**
@@ -23560,6 +23597,7 @@ export namespace Prisma {
   export type ShoppingCartSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
     items?: boolean | ShoppingCart$itemsArgs<ExtArgs>
     _count?: boolean | ShoppingCartCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["shoppingCart"]>
@@ -23567,11 +23605,13 @@ export namespace Prisma {
   export type ShoppingCartSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["shoppingCart"]>
 
   export type ShoppingCartSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    users?: boolean | usersDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["shoppingCart"]>
 
   export type ShoppingCartSelectScalar = {
@@ -23581,15 +23621,21 @@ export namespace Prisma {
 
   export type ShoppingCartOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId", ExtArgs["result"]["shoppingCart"]>
   export type ShoppingCartInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
     items?: boolean | ShoppingCart$itemsArgs<ExtArgs>
     _count?: boolean | ShoppingCartCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type ShoppingCartIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type ShoppingCartIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ShoppingCartIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }
+  export type ShoppingCartIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | usersDefaultArgs<ExtArgs>
+  }
 
   export type $ShoppingCartPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ShoppingCart"
     objects: {
+      users: Prisma.$usersPayload<ExtArgs>
       items: Prisma.$ShoppingCartItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -23989,6 +24035,7 @@ export namespace Prisma {
    */
   export interface Prisma__ShoppingCartClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    users<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     items<T extends ShoppingCart$itemsArgs<ExtArgs> = {}>(args?: Subset<T, ShoppingCart$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ShoppingCartItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -24270,6 +24317,10 @@ export namespace Prisma {
      */
     data: ShoppingCartCreateManyInput | ShoppingCartCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShoppingCartIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -24340,6 +24391,10 @@ export namespace Prisma {
      * Limit how many ShoppingCarts to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ShoppingCartIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -28267,6 +28322,7 @@ export namespace Prisma {
     one_time_tokens?: One_time_tokensListRelationFilter
     sessions?: SessionsListRelationFilter
     Comments?: CommentsListRelationFilter
+    ShoppingCart?: ShoppingCartListRelationFilter
   }
 
   export type usersOrderByWithRelationInput = {
@@ -28310,6 +28366,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensOrderByRelationAggregateInput
     sessions?: sessionsOrderByRelationAggregateInput
     Comments?: CommentsOrderByRelationAggregateInput
+    ShoppingCart?: ShoppingCartOrderByRelationAggregateInput
   }
 
   export type usersWhereUniqueInput = Prisma.AtLeast<{
@@ -28356,6 +28413,7 @@ export namespace Prisma {
     one_time_tokens?: One_time_tokensListRelationFilter
     sessions?: SessionsListRelationFilter
     Comments?: CommentsListRelationFilter
+    ShoppingCart?: ShoppingCartListRelationFilter
   }, "id" | "phone">
 
   export type usersOrderByWithAggregationInput = {
@@ -28593,12 +28651,14 @@ export namespace Prisma {
     NOT?: ShoppingCartWhereInput | ShoppingCartWhereInput[]
     id?: IntFilter<"ShoppingCart"> | number
     userId?: UuidFilter<"ShoppingCart"> | string
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
     items?: ShoppingCartItemListRelationFilter
   }
 
   export type ShoppingCartOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
+    users?: usersOrderByWithRelationInput
     items?: ShoppingCartItemOrderByRelationAggregateInput
   }
 
@@ -28608,6 +28668,7 @@ export namespace Prisma {
     OR?: ShoppingCartWhereInput[]
     NOT?: ShoppingCartWhereInput | ShoppingCartWhereInput[]
     userId?: UuidFilter<"ShoppingCart"> | string
+    users?: XOR<UsersScalarRelationFilter, usersWhereInput>
     items?: ShoppingCartItemListRelationFilter
   }, "id">
 
@@ -29885,6 +29946,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensCreateNestedManyWithoutUsersInput
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     Comments?: CommentsCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartCreateNestedManyWithoutUsersInput
   }
 
   export type usersUncheckedCreateInput = {
@@ -29928,6 +29990,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedCreateNestedManyWithoutUsersInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartUncheckedCreateNestedManyWithoutUsersInput
   }
 
   export type usersUpdateInput = {
@@ -29971,6 +30034,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUpdateManyWithoutUsersNestedInput
   }
 
   export type usersUncheckedUpdateInput = {
@@ -30014,6 +30078,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUncheckedUpdateManyWithoutUsersNestedInput
   }
 
   export type usersCreateManyInput = {
@@ -30283,7 +30348,7 @@ export namespace Prisma {
   }
 
   export type ShoppingCartCreateInput = {
-    userId: string
+    users: usersCreateNestedOneWithoutShoppingCartInput
     items?: ShoppingCartItemCreateNestedManyWithoutCartInput
   }
 
@@ -30294,7 +30359,7 @@ export namespace Prisma {
   }
 
   export type ShoppingCartUpdateInput = {
-    userId?: StringFieldUpdateOperationsInput | string
+    users?: usersUpdateOneRequiredWithoutShoppingCartNestedInput
     items?: ShoppingCartItemUpdateManyWithoutCartNestedInput
   }
 
@@ -30310,7 +30375,7 @@ export namespace Prisma {
   }
 
   export type ShoppingCartUpdateManyMutationInput = {
-    userId?: StringFieldUpdateOperationsInput | string
+
   }
 
   export type ShoppingCartUncheckedUpdateManyInput = {
@@ -31434,6 +31499,12 @@ export namespace Prisma {
     none?: CommentsWhereInput
   }
 
+  export type ShoppingCartListRelationFilter = {
+    every?: ShoppingCartWhereInput
+    some?: ShoppingCartWhereInput
+    none?: ShoppingCartWhereInput
+  }
+
   export type identitiesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -31451,6 +31522,10 @@ export namespace Prisma {
   }
 
   export type CommentsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ShoppingCartOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -32419,6 +32494,13 @@ export namespace Prisma {
     connect?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
   }
 
+  export type ShoppingCartCreateNestedManyWithoutUsersInput = {
+    create?: XOR<ShoppingCartCreateWithoutUsersInput, ShoppingCartUncheckedCreateWithoutUsersInput> | ShoppingCartCreateWithoutUsersInput[] | ShoppingCartUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: ShoppingCartCreateOrConnectWithoutUsersInput | ShoppingCartCreateOrConnectWithoutUsersInput[]
+    createMany?: ShoppingCartCreateManyUsersInputEnvelope
+    connect?: ShoppingCartWhereUniqueInput | ShoppingCartWhereUniqueInput[]
+  }
+
   export type identitiesUncheckedCreateNestedManyWithoutUsersInput = {
     create?: XOR<identitiesCreateWithoutUsersInput, identitiesUncheckedCreateWithoutUsersInput> | identitiesCreateWithoutUsersInput[] | identitiesUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: identitiesCreateOrConnectWithoutUsersInput | identitiesCreateOrConnectWithoutUsersInput[]
@@ -32452,6 +32534,13 @@ export namespace Prisma {
     connectOrCreate?: CommentsCreateOrConnectWithoutUserInput | CommentsCreateOrConnectWithoutUserInput[]
     createMany?: CommentsCreateManyUserInputEnvelope
     connect?: CommentsWhereUniqueInput | CommentsWhereUniqueInput[]
+  }
+
+  export type ShoppingCartUncheckedCreateNestedManyWithoutUsersInput = {
+    create?: XOR<ShoppingCartCreateWithoutUsersInput, ShoppingCartUncheckedCreateWithoutUsersInput> | ShoppingCartCreateWithoutUsersInput[] | ShoppingCartUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: ShoppingCartCreateOrConnectWithoutUsersInput | ShoppingCartCreateOrConnectWithoutUsersInput[]
+    createMany?: ShoppingCartCreateManyUsersInputEnvelope
+    connect?: ShoppingCartWhereUniqueInput | ShoppingCartWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -32536,6 +32625,20 @@ export namespace Prisma {
     deleteMany?: CommentsScalarWhereInput | CommentsScalarWhereInput[]
   }
 
+  export type ShoppingCartUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<ShoppingCartCreateWithoutUsersInput, ShoppingCartUncheckedCreateWithoutUsersInput> | ShoppingCartCreateWithoutUsersInput[] | ShoppingCartUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: ShoppingCartCreateOrConnectWithoutUsersInput | ShoppingCartCreateOrConnectWithoutUsersInput[]
+    upsert?: ShoppingCartUpsertWithWhereUniqueWithoutUsersInput | ShoppingCartUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: ShoppingCartCreateManyUsersInputEnvelope
+    set?: ShoppingCartWhereUniqueInput | ShoppingCartWhereUniqueInput[]
+    disconnect?: ShoppingCartWhereUniqueInput | ShoppingCartWhereUniqueInput[]
+    delete?: ShoppingCartWhereUniqueInput | ShoppingCartWhereUniqueInput[]
+    connect?: ShoppingCartWhereUniqueInput | ShoppingCartWhereUniqueInput[]
+    update?: ShoppingCartUpdateWithWhereUniqueWithoutUsersInput | ShoppingCartUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: ShoppingCartUpdateManyWithWhereWithoutUsersInput | ShoppingCartUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: ShoppingCartScalarWhereInput | ShoppingCartScalarWhereInput[]
+  }
+
   export type identitiesUncheckedUpdateManyWithoutUsersNestedInput = {
     create?: XOR<identitiesCreateWithoutUsersInput, identitiesUncheckedCreateWithoutUsersInput> | identitiesCreateWithoutUsersInput[] | identitiesUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: identitiesCreateOrConnectWithoutUsersInput | identitiesCreateOrConnectWithoutUsersInput[]
@@ -32604,6 +32707,20 @@ export namespace Prisma {
     update?: CommentsUpdateWithWhereUniqueWithoutUserInput | CommentsUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: CommentsUpdateManyWithWhereWithoutUserInput | CommentsUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CommentsScalarWhereInput | CommentsScalarWhereInput[]
+  }
+
+  export type ShoppingCartUncheckedUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<ShoppingCartCreateWithoutUsersInput, ShoppingCartUncheckedCreateWithoutUsersInput> | ShoppingCartCreateWithoutUsersInput[] | ShoppingCartUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: ShoppingCartCreateOrConnectWithoutUsersInput | ShoppingCartCreateOrConnectWithoutUsersInput[]
+    upsert?: ShoppingCartUpsertWithWhereUniqueWithoutUsersInput | ShoppingCartUpsertWithWhereUniqueWithoutUsersInput[]
+    createMany?: ShoppingCartCreateManyUsersInputEnvelope
+    set?: ShoppingCartWhereUniqueInput | ShoppingCartWhereUniqueInput[]
+    disconnect?: ShoppingCartWhereUniqueInput | ShoppingCartWhereUniqueInput[]
+    delete?: ShoppingCartWhereUniqueInput | ShoppingCartWhereUniqueInput[]
+    connect?: ShoppingCartWhereUniqueInput | ShoppingCartWhereUniqueInput[]
+    update?: ShoppingCartUpdateWithWhereUniqueWithoutUsersInput | ShoppingCartUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: ShoppingCartUpdateManyWithWhereWithoutUsersInput | ShoppingCartUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: ShoppingCartScalarWhereInput | ShoppingCartScalarWhereInput[]
   }
 
   export type CommentsCreateNestedManyWithoutFoodInput = {
@@ -32766,6 +32883,12 @@ export namespace Prisma {
     deleteMany?: FoodScalarWhereInput | FoodScalarWhereInput[]
   }
 
+  export type usersCreateNestedOneWithoutShoppingCartInput = {
+    create?: XOR<usersCreateWithoutShoppingCartInput, usersUncheckedCreateWithoutShoppingCartInput>
+    connectOrCreate?: usersCreateOrConnectWithoutShoppingCartInput
+    connect?: usersWhereUniqueInput
+  }
+
   export type ShoppingCartItemCreateNestedManyWithoutCartInput = {
     create?: XOR<ShoppingCartItemCreateWithoutCartInput, ShoppingCartItemUncheckedCreateWithoutCartInput> | ShoppingCartItemCreateWithoutCartInput[] | ShoppingCartItemUncheckedCreateWithoutCartInput[]
     connectOrCreate?: ShoppingCartItemCreateOrConnectWithoutCartInput | ShoppingCartItemCreateOrConnectWithoutCartInput[]
@@ -32778,6 +32901,14 @@ export namespace Prisma {
     connectOrCreate?: ShoppingCartItemCreateOrConnectWithoutCartInput | ShoppingCartItemCreateOrConnectWithoutCartInput[]
     createMany?: ShoppingCartItemCreateManyCartInputEnvelope
     connect?: ShoppingCartItemWhereUniqueInput | ShoppingCartItemWhereUniqueInput[]
+  }
+
+  export type usersUpdateOneRequiredWithoutShoppingCartNestedInput = {
+    create?: XOR<usersCreateWithoutShoppingCartInput, usersUncheckedCreateWithoutShoppingCartInput>
+    connectOrCreate?: usersCreateOrConnectWithoutShoppingCartInput
+    upsert?: usersUpsertWithoutShoppingCartInput
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutShoppingCartInput, usersUpdateWithoutShoppingCartInput>, usersUncheckedUpdateWithoutShoppingCartInput>
   }
 
   export type ShoppingCartItemUpdateManyWithoutCartNestedInput = {
@@ -33419,6 +33550,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensCreateNestedManyWithoutUsersInput
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     Comments?: CommentsCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartCreateNestedManyWithoutUsersInput
   }
 
   export type usersUncheckedCreateWithoutIdentitiesInput = {
@@ -33461,6 +33593,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedCreateNestedManyWithoutUsersInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartUncheckedCreateNestedManyWithoutUsersInput
   }
 
   export type usersCreateOrConnectWithoutIdentitiesInput = {
@@ -33519,6 +33652,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUpdateManyWithoutUsersNestedInput
   }
 
   export type usersUncheckedUpdateWithoutIdentitiesInput = {
@@ -33561,6 +33695,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUncheckedUpdateManyWithoutUsersNestedInput
   }
 
   export type sessionsCreateWithoutMfa_amr_claimsInput = {
@@ -33783,6 +33918,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensCreateNestedManyWithoutUsersInput
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     Comments?: CommentsCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartCreateNestedManyWithoutUsersInput
   }
 
   export type usersUncheckedCreateWithoutMfa_factorsInput = {
@@ -33825,6 +33961,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedCreateNestedManyWithoutUsersInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartUncheckedCreateNestedManyWithoutUsersInput
   }
 
   export type usersCreateOrConnectWithoutMfa_factorsInput = {
@@ -33912,6 +34049,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUpdateManyWithoutUsersNestedInput
   }
 
   export type usersUncheckedUpdateWithoutMfa_factorsInput = {
@@ -33954,6 +34092,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUncheckedUpdateManyWithoutUsersNestedInput
   }
 
   export type usersCreateWithoutOne_time_tokensInput = {
@@ -33996,6 +34135,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsCreateNestedManyWithoutUsersInput
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     Comments?: CommentsCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartCreateNestedManyWithoutUsersInput
   }
 
   export type usersUncheckedCreateWithoutOne_time_tokensInput = {
@@ -34038,6 +34178,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsUncheckedCreateNestedManyWithoutUsersInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartUncheckedCreateNestedManyWithoutUsersInput
   }
 
   export type usersCreateOrConnectWithoutOne_time_tokensInput = {
@@ -34096,6 +34237,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUpdateManyWithoutUsersNestedInput
   }
 
   export type usersUncheckedUpdateWithoutOne_time_tokensInput = {
@@ -34138,6 +34280,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsUncheckedUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUncheckedUpdateManyWithoutUsersNestedInput
   }
 
   export type sessionsCreateWithoutRefresh_tokensInput = {
@@ -34492,6 +34635,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsCreateNestedManyWithoutUsersInput
     one_time_tokens?: one_time_tokensCreateNestedManyWithoutUsersInput
     Comments?: CommentsCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartCreateNestedManyWithoutUsersInput
   }
 
   export type usersUncheckedCreateWithoutSessionsInput = {
@@ -34534,6 +34678,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsUncheckedCreateNestedManyWithoutUsersInput
     one_time_tokens?: one_time_tokensUncheckedCreateNestedManyWithoutUsersInput
     Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartUncheckedCreateNestedManyWithoutUsersInput
   }
 
   export type usersCreateOrConnectWithoutSessionsInput = {
@@ -34650,6 +34795,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsUpdateManyWithoutUsersNestedInput
     one_time_tokens?: one_time_tokensUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUpdateManyWithoutUsersNestedInput
   }
 
   export type usersUncheckedUpdateWithoutSessionsInput = {
@@ -34692,6 +34838,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsUncheckedUpdateManyWithoutUsersNestedInput
     one_time_tokens?: one_time_tokensUncheckedUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUncheckedUpdateManyWithoutUsersNestedInput
   }
 
   export type sso_providersCreateWithoutSso_domainsInput = {
@@ -35071,6 +35218,25 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ShoppingCartCreateWithoutUsersInput = {
+    items?: ShoppingCartItemCreateNestedManyWithoutCartInput
+  }
+
+  export type ShoppingCartUncheckedCreateWithoutUsersInput = {
+    id?: number
+    items?: ShoppingCartItemUncheckedCreateNestedManyWithoutCartInput
+  }
+
+  export type ShoppingCartCreateOrConnectWithoutUsersInput = {
+    where: ShoppingCartWhereUniqueInput
+    create: XOR<ShoppingCartCreateWithoutUsersInput, ShoppingCartUncheckedCreateWithoutUsersInput>
+  }
+
+  export type ShoppingCartCreateManyUsersInputEnvelope = {
+    data: ShoppingCartCreateManyUsersInput | ShoppingCartCreateManyUsersInput[]
+    skipDuplicates?: boolean
+  }
+
   export type identitiesUpsertWithWhereUniqueWithoutUsersInput = {
     where: identitiesWhereUniqueInput
     update: XOR<identitiesUpdateWithoutUsersInput, identitiesUncheckedUpdateWithoutUsersInput>
@@ -35224,6 +35390,30 @@ export namespace Prisma {
     foodId?: IntFilter<"Comments"> | number
     userId?: UuidFilter<"Comments"> | string
     created_at?: DateTimeFilter<"Comments"> | Date | string
+  }
+
+  export type ShoppingCartUpsertWithWhereUniqueWithoutUsersInput = {
+    where: ShoppingCartWhereUniqueInput
+    update: XOR<ShoppingCartUpdateWithoutUsersInput, ShoppingCartUncheckedUpdateWithoutUsersInput>
+    create: XOR<ShoppingCartCreateWithoutUsersInput, ShoppingCartUncheckedCreateWithoutUsersInput>
+  }
+
+  export type ShoppingCartUpdateWithWhereUniqueWithoutUsersInput = {
+    where: ShoppingCartWhereUniqueInput
+    data: XOR<ShoppingCartUpdateWithoutUsersInput, ShoppingCartUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type ShoppingCartUpdateManyWithWhereWithoutUsersInput = {
+    where: ShoppingCartScalarWhereInput
+    data: XOR<ShoppingCartUpdateManyMutationInput, ShoppingCartUncheckedUpdateManyWithoutUsersInput>
+  }
+
+  export type ShoppingCartScalarWhereInput = {
+    AND?: ShoppingCartScalarWhereInput | ShoppingCartScalarWhereInput[]
+    OR?: ShoppingCartScalarWhereInput[]
+    NOT?: ShoppingCartScalarWhereInput | ShoppingCartScalarWhereInput[]
+    id?: IntFilter<"ShoppingCart"> | number
+    userId?: UuidFilter<"ShoppingCart"> | string
   }
 
   export type CommentsCreateWithoutFoodInput = {
@@ -35429,6 +35619,97 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Food"> | Date | string
   }
 
+  export type usersCreateWithoutShoppingCartInput = {
+    instance_id?: string | null
+    id: string
+    aud?: string | null
+    role?: string | null
+    email?: string | null
+    encrypted_password?: string | null
+    email_confirmed_at?: Date | string | null
+    invited_at?: Date | string | null
+    confirmation_token?: string | null
+    confirmation_sent_at?: Date | string | null
+    recovery_token?: string | null
+    recovery_sent_at?: Date | string | null
+    email_change_token_new?: string | null
+    email_change?: string | null
+    email_change_sent_at?: Date | string | null
+    last_sign_in_at?: Date | string | null
+    raw_app_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    raw_user_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    is_super_admin?: boolean | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    phone?: string | null
+    phone_confirmed_at?: Date | string | null
+    phone_change?: string | null
+    phone_change_token?: string | null
+    phone_change_sent_at?: Date | string | null
+    confirmed_at?: Date | string | null
+    email_change_token_current?: string | null
+    email_change_confirm_status?: number | null
+    banned_until?: Date | string | null
+    reauthentication_token?: string | null
+    reauthentication_sent_at?: Date | string | null
+    is_sso_user?: boolean
+    deleted_at?: Date | string | null
+    is_anonymous?: boolean
+    identities?: identitiesCreateNestedManyWithoutUsersInput
+    mfa_factors?: mfa_factorsCreateNestedManyWithoutUsersInput
+    one_time_tokens?: one_time_tokensCreateNestedManyWithoutUsersInput
+    sessions?: sessionsCreateNestedManyWithoutUsersInput
+    Comments?: CommentsCreateNestedManyWithoutUserInput
+  }
+
+  export type usersUncheckedCreateWithoutShoppingCartInput = {
+    instance_id?: string | null
+    id: string
+    aud?: string | null
+    role?: string | null
+    email?: string | null
+    encrypted_password?: string | null
+    email_confirmed_at?: Date | string | null
+    invited_at?: Date | string | null
+    confirmation_token?: string | null
+    confirmation_sent_at?: Date | string | null
+    recovery_token?: string | null
+    recovery_sent_at?: Date | string | null
+    email_change_token_new?: string | null
+    email_change?: string | null
+    email_change_sent_at?: Date | string | null
+    last_sign_in_at?: Date | string | null
+    raw_app_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    raw_user_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    is_super_admin?: boolean | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    phone?: string | null
+    phone_confirmed_at?: Date | string | null
+    phone_change?: string | null
+    phone_change_token?: string | null
+    phone_change_sent_at?: Date | string | null
+    confirmed_at?: Date | string | null
+    email_change_token_current?: string | null
+    email_change_confirm_status?: number | null
+    banned_until?: Date | string | null
+    reauthentication_token?: string | null
+    reauthentication_sent_at?: Date | string | null
+    is_sso_user?: boolean
+    deleted_at?: Date | string | null
+    is_anonymous?: boolean
+    identities?: identitiesUncheckedCreateNestedManyWithoutUsersInput
+    mfa_factors?: mfa_factorsUncheckedCreateNestedManyWithoutUsersInput
+    one_time_tokens?: one_time_tokensUncheckedCreateNestedManyWithoutUsersInput
+    sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
+    Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type usersCreateOrConnectWithoutShoppingCartInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutShoppingCartInput, usersUncheckedCreateWithoutShoppingCartInput>
+  }
+
   export type ShoppingCartItemCreateWithoutCartInput = {
     quantity?: number
     food: FoodCreateNestedOneWithoutCartItemsInput
@@ -35450,6 +35731,103 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type usersUpsertWithoutShoppingCartInput = {
+    update: XOR<usersUpdateWithoutShoppingCartInput, usersUncheckedUpdateWithoutShoppingCartInput>
+    create: XOR<usersCreateWithoutShoppingCartInput, usersUncheckedCreateWithoutShoppingCartInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutShoppingCartInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutShoppingCartInput, usersUncheckedUpdateWithoutShoppingCartInput>
+  }
+
+  export type usersUpdateWithoutShoppingCartInput = {
+    instance_id?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    aud?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    encrypted_password?: NullableStringFieldUpdateOperationsInput | string | null
+    email_confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invited_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    confirmation_token?: NullableStringFieldUpdateOperationsInput | string | null
+    confirmation_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    recovery_token?: NullableStringFieldUpdateOperationsInput | string | null
+    recovery_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_change_token_new?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_sign_in_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    raw_app_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    raw_user_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    is_super_admin?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone_change?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_change_token?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_change_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_change_token_current?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change_confirm_status?: NullableIntFieldUpdateOperationsInput | number | null
+    banned_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reauthentication_token?: NullableStringFieldUpdateOperationsInput | string | null
+    reauthentication_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_sso_user?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_anonymous?: BoolFieldUpdateOperationsInput | boolean
+    identities?: identitiesUpdateManyWithoutUsersNestedInput
+    mfa_factors?: mfa_factorsUpdateManyWithoutUsersNestedInput
+    one_time_tokens?: one_time_tokensUpdateManyWithoutUsersNestedInput
+    sessions?: sessionsUpdateManyWithoutUsersNestedInput
+    Comments?: CommentsUpdateManyWithoutUserNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutShoppingCartInput = {
+    instance_id?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    aud?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    encrypted_password?: NullableStringFieldUpdateOperationsInput | string | null
+    email_confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invited_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    confirmation_token?: NullableStringFieldUpdateOperationsInput | string | null
+    confirmation_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    recovery_token?: NullableStringFieldUpdateOperationsInput | string | null
+    recovery_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_change_token_new?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_sign_in_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    raw_app_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    raw_user_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    is_super_admin?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone_change?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_change_token?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_change_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_change_token_current?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change_confirm_status?: NullableIntFieldUpdateOperationsInput | number | null
+    banned_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reauthentication_token?: NullableStringFieldUpdateOperationsInput | string | null
+    reauthentication_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_sso_user?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_anonymous?: BoolFieldUpdateOperationsInput | boolean
+    identities?: identitiesUncheckedUpdateManyWithoutUsersNestedInput
+    mfa_factors?: mfa_factorsUncheckedUpdateManyWithoutUsersNestedInput
+    one_time_tokens?: one_time_tokensUncheckedUpdateManyWithoutUsersNestedInput
+    sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
+    Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type ShoppingCartItemUpsertWithWhereUniqueWithoutCartInput = {
     where: ShoppingCartItemWhereUniqueInput
     update: XOR<ShoppingCartItemUpdateWithoutCartInput, ShoppingCartItemUncheckedUpdateWithoutCartInput>
@@ -35467,7 +35845,7 @@ export namespace Prisma {
   }
 
   export type ShoppingCartCreateWithoutItemsInput = {
-    userId: string
+    users: usersCreateNestedOneWithoutShoppingCartInput
   }
 
   export type ShoppingCartUncheckedCreateWithoutItemsInput = {
@@ -35524,7 +35902,7 @@ export namespace Prisma {
   }
 
   export type ShoppingCartUpdateWithoutItemsInput = {
-    userId?: StringFieldUpdateOperationsInput | string
+    users?: usersUpdateOneRequiredWithoutShoppingCartNestedInput
   }
 
   export type ShoppingCartUncheckedUpdateWithoutItemsInput = {
@@ -35642,6 +36020,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsCreateNestedManyWithoutUsersInput
     one_time_tokens?: one_time_tokensCreateNestedManyWithoutUsersInput
     sessions?: sessionsCreateNestedManyWithoutUsersInput
+    ShoppingCart?: ShoppingCartCreateNestedManyWithoutUsersInput
   }
 
   export type usersUncheckedCreateWithoutCommentsInput = {
@@ -35684,6 +36063,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsUncheckedCreateNestedManyWithoutUsersInput
     one_time_tokens?: one_time_tokensUncheckedCreateNestedManyWithoutUsersInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
+    ShoppingCart?: ShoppingCartUncheckedCreateNestedManyWithoutUsersInput
   }
 
   export type usersCreateOrConnectWithoutCommentsInput = {
@@ -35780,6 +36160,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsUpdateManyWithoutUsersNestedInput
     one_time_tokens?: one_time_tokensUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
+    ShoppingCart?: ShoppingCartUpdateManyWithoutUsersNestedInput
   }
 
   export type usersUncheckedUpdateWithoutCommentsInput = {
@@ -35822,6 +36203,7 @@ export namespace Prisma {
     mfa_factors?: mfa_factorsUncheckedUpdateManyWithoutUsersNestedInput
     one_time_tokens?: one_time_tokensUncheckedUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
+    ShoppingCart?: ShoppingCartUncheckedUpdateManyWithoutUsersNestedInput
   }
 
   export type saml_relay_statesCreateManyFlow_stateInput = {
@@ -36139,6 +36521,10 @@ export namespace Prisma {
     created_at?: Date | string
   }
 
+  export type ShoppingCartCreateManyUsersInput = {
+    id?: number
+  }
+
   export type identitiesUpdateWithoutUsersInput = {
     provider_id?: StringFieldUpdateOperationsInput | string
     identity_data?: JsonNullValueInput | InputJsonValue
@@ -36307,6 +36693,19 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     foodId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ShoppingCartUpdateWithoutUsersInput = {
+    items?: ShoppingCartItemUpdateManyWithoutCartNestedInput
+  }
+
+  export type ShoppingCartUncheckedUpdateWithoutUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    items?: ShoppingCartItemUncheckedUpdateManyWithoutCartNestedInput
+  }
+
+  export type ShoppingCartUncheckedUpdateManyWithoutUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
   }
 
   export type CommentsCreateManyFoodInput = {

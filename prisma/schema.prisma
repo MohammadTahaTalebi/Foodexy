@@ -324,6 +324,7 @@ model users {
   one_time_tokens             one_time_tokens[]
   sessions                    sessions[]
   Comments                    Comments[]
+  ShoppingCart                ShoppingCart[]
 
   @@index([instance_id])
   @@index([is_anonymous])
@@ -343,7 +344,7 @@ model Food {
   created_at DateTime           @default(now())
   comments   Comments[]
   shop       Restaurants        @relation(fields: [shopId], references: [id])
-  cartItems  ShoppingCartItem[] @relation(name: "ShoppingCartItemToFood")
+  cartItems  ShoppingCartItem[] @relation("ShoppingCartItemToFood")
 
   @@schema("public")
 }
@@ -362,6 +363,7 @@ model Restaurants {
 model ShoppingCart {
   id     Int                @id @default(autoincrement())
   userId String             @db.Uuid
+  users  users              @relation(fields: [userId], references: [id], onDelete: Cascade)
   items  ShoppingCartItem[]
 
   @@schema("public")
@@ -373,7 +375,7 @@ model ShoppingCartItem {
   foodId   Int
   quantity Int          @default(1)
   cart     ShoppingCart @relation(fields: [cartId], references: [id])
-  food     Food         @relation(fields: [foodId], references: [id], name: "ShoppingCartItemToFood")
+  food     Food         @relation("ShoppingCartItemToFood", fields: [foodId], references: [id])
 
   @@schema("public")
 }
