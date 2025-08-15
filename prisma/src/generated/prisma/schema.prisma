@@ -413,10 +413,8 @@ enum one_time_token_type {
 }
 
 enum Category {
-  PASTA
-  SUSHI
-  PIZZA
-  BURGER
+  FASTFOOD
+  SALAD
   DESSERT
   DRINK
 

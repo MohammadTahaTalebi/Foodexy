@@ -1,4 +1,7 @@
-import { Category, Restaurants } from "./../../../prisma/src/generated/prisma/index.d";
+import {
+  Category,
+  Restaurants,
+} from "./../../../prisma/src/generated/prisma/index.d";
 import { prisma } from "../prisma";
 
 export async function getAllFoods() {
@@ -23,12 +26,24 @@ export async function getFoodById(foodId: number) {
   }
 }
 
-export async function getFromThisShop(foodId: number, shopId: number) {
+export async function getFromThisShopNotFoodID(foodId: number, shopId: number) {
   try {
     return await prisma.food.findMany({
       take: 4,
       where: {
         id: { not: foodId },
+        shopId: shopId,
+      },
+    });
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function getFromThisShop(shopId: number) {
+  try {
+    return await prisma.food.findMany({
+      where: {
         shopId: shopId,
       },
     });

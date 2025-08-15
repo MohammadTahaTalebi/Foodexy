@@ -1,34 +1,20 @@
 import { Star } from "lucide-react";
-import Image from "next/image";
-import { Category, Food, Restaurants } from "../../../prisma/src/generated/prisma";
-import Link from "next/link";
 import { FaHamburger, FaLeaf, FaIceCream, FaGlassMartiniAlt } from "react-icons/fa";
+import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
+import { Category, Food, Restaurants } from "../../../prisma/src/generated/prisma";
 
 interface FoodCardProps {
   food: Food & { shop: Restaurants };
   onAddToCart?: () => void;
 }
 
-export const categoryMap: Record<Category, { name: string; icon: string }> = {
-  FAST_FOOD: {
-    name: "Fast Food",
-    icon: "https://img.icons8.com/?size=100&id=DbH0FbjXLLIZ&format=png&color=ffffff"
-  },
-  SALADS: {
-    name: "Salads",
-    icon: "https://img.icons8.com/?size=100&id=WhCAJ2GOgHnN&format=png&color=ffffff"
-  },
-  DESSERTS: {
-    name: "Desserts",
-    icon: "https://img.icons8.com/?size=100&id=1g4hL99Duiau&format=png&color=ffffff"
-  },
-  DRINKS: {
-    name: "Drinks",
-    icon: "https://img.icons8.com/?size=100&id=45816&format=png&color=ffffff"
-  }
+export const categoryMap: Record<Category, { name: string; icon: JSX.Element }> = {
+  PIZZA: { name: "Fast Food", icon: <FaHamburger className="w-4 h-4" /> },
+  SALADS: { name: "Salads", icon: <FaLeaf className="w-4 h-4" /> },
+  DESSERTS: { name: "Desserts", icon: <FaIceCream className="w-4 h-4" /> },
+  DRINKS: { name: "Drinks", icon: <FaGlassMartiniAlt className="w-4 h-4" /> },
 };
-
 
 export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
   const category = categoryMap[food.category];
@@ -38,11 +24,9 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
     <div className="!w-full bg-background-secondry rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-border group">
       {/* Image Section */}
       <div className="relative w-full h-60 overflow-hidden">
-        <Image
+        <img
           src={food.image}
           alt={food.name}
-          width={1080}
-          height={1080}
           className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
@@ -69,11 +53,11 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
                 <Star
                   key={i}
                   className={`w-4 h-4 ${full
-                      ? "fill-secondary text-secondary"
-                      : half
-                        ? "text-primary/50 fill-primary/20"
-                        : "text-primary/50 fill-primary/20"
-                    }`}
+                    ? "fill-secondary text-secondary"
+                    : half
+                      ? "text-primary/50 fill-primary/20"
+                      : "text-primary/50 fill-primary/20"
+                  }`}
                 />
               );
             })}

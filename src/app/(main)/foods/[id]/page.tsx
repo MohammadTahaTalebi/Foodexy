@@ -2,7 +2,7 @@ import CommentForm from "@/components/CommentForm";
 import { getFoodComments } from "@/lib/actions/comments.action";
 import {
   getFoodById,
-  getFromThisShop,
+  getFromThisShopNotFoodID,
   getSimilarFoods,
 } from "@/lib/actions/foods.action";
 import { Star } from "lucide-react";
@@ -44,7 +44,7 @@ export default async function FoodDetailPage({ params }: FoodPageProps) {
       </div>
     );
   }
-  const fromThisShop = await getFromThisShop(food.id, food.shopId);
+  const fromThisShop = await getFromThisShopNotFoodID(food.id, food.shopId);
   const similarFoods = await getSimilarFoods(food.id, food.category);
   const comments = await getFoodComments(food.id);
   return (

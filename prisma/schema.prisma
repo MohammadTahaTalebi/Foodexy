@@ -324,6 +324,7 @@ model users {
   one_time_tokens             one_time_tokens[]
   sessions                    sessions[]
   Comments                    Comments[]
+  ShoppingCart                ShoppingCart?
 
   @@index([instance_id])
   @@index([is_anonymous])
@@ -331,18 +332,19 @@ model users {
 }
 
 model Food {
-  id         Int         @id @default(autoincrement())
-  name       String
-  desc       String
-  star       Float       @default(0)
-  price      Float
-  createdAt  DateTime    @default(now())
-  category   Category
-  image      String
-  shopId     Int
-  created_at DateTime    @default(now())
-  comments   Comments[]
-  shop       Restaurants @relation(fields: [shopId], references: [id])
+  id               Int                @id @default(autoincrement())
+  name             String
+  desc             String
+  star             Float              @default(0)
+  price            Float
+  createdAt        DateTime           @default(now())
+  category         Category
+  image            String
+  shopId           Int
+  created_at       DateTime           @default(now())
+  comments         Comments[]
+  shop             Restaurants        @relation(fields: [shopId], references: [id])
+  ShoppingCartItem ShoppingCartItem[]
 
   @@schema("public")
 }
@@ -350,7 +352,6 @@ model Food {
 model Restaurants {
   id         Int      @id @default(autoincrement())
   name       String
-  desc       String
   image      String
   ownerId    String   @db.Uuid
   created_at DateTime @default(now())
@@ -368,6 +369,26 @@ model Comments {
   created_at DateTime @default(now())
   food       Food     @relation(fields: [foodId], references: [id])
   user       users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@schema("public")
+}
+
+model ShoppingCart {
+  id               Int                @id @default(autoincrement())
+  userId           String             @unique @db.Uuid
+  users            users              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ShoppingCartItem ShoppingCartItem[]
+
+  @@schema("public")
+}
+
+model ShoppingCartItem {
+  id           Int          @id @default(autoincrement())
+  cartId       Int
+  foodId       Int
+  quantity     Int          @default(1)
+  ShoppingCart ShoppingCart @relation(fields: [cartId], references: [id])
+  Food         Food         @relation(fields: [foodId], references: [id])
 
   @@schema("public")
 }
@@ -414,10 +435,10 @@ enum one_time_token_type {
 }
 
 enum Category {
-  FAST_FOOD
-  SALADS
-  DESSERTS
-  DRINKS
+  FASTFOOD
+  SALAD
+  DESSERT
+  DRINK
 
   @@schema("public")
 }
