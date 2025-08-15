@@ -1,13 +1,7 @@
 import { Star } from "lucide-react";
 import Image from "next/image";
-import { Food, Restaurants } from "../../../prisma/src/generated/prisma";
 import Link from "next/link";
-import {
-  FaHamburger,
-  FaLeaf,
-  FaIceCream,
-  FaGlassMartiniAlt,
-} from "react-icons/fa";
+import { Food, Restaurants } from "../../../prisma/src/generated/prisma";
 
 interface FoodCardProps {
   food: Food & { shop: Restaurants };
@@ -16,28 +10,30 @@ interface FoodCardProps {
 
 export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
   return (
-    <div className="!w-full bg-background-secondry rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-border group">
-      <div className="relative w-full h-60 overflow-hidden rounded-2xl group">
+    <div className="w-full bg-background-secondry rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border border-border overflow-hidden flex flex-col">
+      {/* Image */}
+      <div className="relative w-full h-60 overflow-hidden">
         <Image
           src={food.image}
           alt={food.name}
           width={1080}
           height={1080}
-          className="w-full h-full transform transition-transform duration-300 group-hover:scale-105"
+          className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
         />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-
-        <div className="absolute top-3 left-3 bg-primary/90 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 select-none">
-          <span>{food.category}</span>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        <div className="absolute top-3 left-3 bg-primary/90 text-white px-3 py-1 rounded-full text-xs font-semibold">
+          {food.category}
         </div>
       </div>
-      <div className="p-6 flex flex-col gap-2">
-        <div className="flex justify-between items-start">
-          <h2 className="text-xl font-bold text-card-foreground truncate max-w-[70%]">
+
+      {/* Content */}
+      <div className="p-5 flex flex-col flex-1">
+        {/* Name + Rating */}
+        <div className="flex justify-between items-start mb-1">
+          <h2 className="text-lg font-bold text-card-foreground truncate max-w-[70%]">
             {food.name}
           </h2>
-          <div className="flex items-center gap-[2px] mb-1">
+          <div className="flex items-center gap-[2px]">
             {Array.from({ length: 5 }, (_, i) => {
               const full = i + 1 <= Math.floor(food.star);
               const half = !full && i + 0.5 < food.star;
@@ -48,8 +44,8 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
                     full
                       ? "fill-secondary text-secondary"
                       : half
-                      ? "text-primary/50 fill-primary/20"
-                      : "text-primary/50 fill-primary/20"
+                      ? "text-secondary/70 fill-secondary/30"
+                      : "text-primary/40 fill-primary/10"
                   }`}
                 />
               );
@@ -57,43 +53,48 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
           </div>
         </div>
 
-        <p className="text-muted-foreground text-sm truncate w-full mb-3">
+        {/* Description */}
+        <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
           {food.desc}
         </p>
 
-        <div className="flex justify-between items-center ">
-          <div className="flex items-center gap-1 cursor-pointer">
-            <img
+        {/* Shop + Price */}
+        <div className="flex justify-between items-center mb-4">
+          <Link
+            href={`/shops/${food.shop.id}`}
+            className="flex items-center gap-2 group"
+          >
+            <Image
               src={food.shop.image}
               alt={food.shop.name}
-              className="w-6 h-6 rounded-full object-cover border border-border"
-              loading="lazy"
+              width={24}
+              height={24}
+              className="rounded-full object-cover border border-border"
             />
-            <span className="text-card-foreground font-bold hover:text-primary">
+            <span className="text-card-foreground font-semibold group-hover:text-primary transition-colors">
               {food.shop.name}
             </span>
+          </Link>
+          <div className="text-secondary font-bold text-lg">
+            ${food.price}
           </div>
-          <div className="text-secondary font-bold text-xl">{food.price}$</div>
         </div>
 
-        <div className="flex justify-between items-center mt-3 text-xs text-muted-foreground border-t border-border pt-4">
-          <div className="text-muted-foreground">
-            {new Date(food.createdAt).toLocaleDateString("en-US")}
-          </div>
+        {/* Actions */}
+        <div className="flex gap-2 mt-auto">
           <button
             onClick={onAddToCart}
-            className="text-sm cursor-pointer bg-primary hover:bg-secondary text-white font-semibold px-4 py-1.5 rounded-full shadow-md transition-all duration-300 hover:scale-105"
+            className="flex-1 bg-primary hover:bg-secondary text-white font-medium px-4 py-2 rounded-full shadow-md transition-transform duration-200 hover:scale-105"
             aria-label={`Add ${food.name} to cart`}
           >
             Add to Cart
           </button>
-          <Link href={`/foods/${food.id}`}>
-            <button
-              className="text-sm cursor-pointer bg-primary hover:bg-secondary text-white font-semibold px-4 py-1.5 rounded-full shadow-md transition-all duration-300 hover:scale-105"
-              aria-label={`View ${food.name} detail`}
-            >
-              View Food
-            </button>
+          <Link
+            href={`/foods/${food.id}`}
+            className="flex-1 bg-muted hover:bg-muted/80 text-card-foreground font-medium px-4 py-2 rounded-full shadow-md transition-transform duration-200 hover:scale-105 text-center"
+            aria-label={`View ${food.name} detail`}
+          >
+            View
           </Link>
         </div>
       </div>
