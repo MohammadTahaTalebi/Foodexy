@@ -20,7 +20,7 @@ export default function ShopCard({ shop }: ShopCardProps) {
             alt={shop.name}
             width={120}
             height={120}
-            className="rounded-full border-4 border-background shadow-lg object-cover transform transition-transform duration-500 group-hover:scale-110"
+            className="rounded-full border-4 border-secondary shadow-lg object-cover transform transition-transform duration-500 group-hover:scale-110"
           />
           <span className="absolute -bottom-2 flex gap-1 -left-2 bg-gradient-to-r from-primary to-secondary text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
             <span>{shop.foods.length}</span>food items

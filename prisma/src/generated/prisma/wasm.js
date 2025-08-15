@@ -403,12 +403,10 @@ exports.aal_level = exports.$Enums.aal_level = {
 };
 
 exports.Category = exports.$Enums.Category = {
-  PASTA: 'PASTA',
-  SUSHI: 'SUSHI',
-  PIZZA: 'PIZZA',
-  BURGER: 'BURGER',
-  DESSERT: 'DESSERT',
-  DRINK: 'DRINK'
+  FAST_FOOD: 'FAST_FOOD',
+  SALADS: 'SALADS',
+  DESSERTS: 'DESSERTS',
+  DRINKS: 'DRINKS'
 };
 
 exports.Prisma.ModelName = {

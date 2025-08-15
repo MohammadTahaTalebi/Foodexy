@@ -184,12 +184,10 @@ export type one_time_token_type = (typeof one_time_token_type)[keyof typeof one_
 
 
 export const Category: {
-  PASTA: 'PASTA',
-  SUSHI: 'SUSHI',
-  PIZZA: 'PIZZA',
-  BURGER: 'BURGER',
-  DESSERT: 'DESSERT',
-  DRINK: 'DRINK'
+  FAST_FOOD: 'FAST_FOOD',
+  SALADS: 'SALADS',
+  DESSERTS: 'DESSERTS',
+  DRINKS: 'DRINKS'
 };
 
 export type Category = (typeof Category)[keyof typeof Category]
@@ -21153,7 +21151,7 @@ export namespace Prisma {
       name: string
       desc: string
       star: number
-      Price: number
+      price: number
       createdAt: Date
       category: $Enums.Category
       image: string

@@ -1,107 +1,120 @@
 import { Star } from "lucide-react";
 import Image from "next/image";
-import { Food, Restaurants } from "../../../prisma/src/generated/prisma";
+import { Category, Food, Restaurants } from "../../../prisma/src/generated/prisma";
 import Link from "next/link";
 import { FaHamburger, FaLeaf, FaIceCream, FaGlassMartiniAlt } from "react-icons/fa";
+import { formatDistanceToNow } from "date-fns";
 
 interface FoodCardProps {
   food: Food & { shop: Restaurants };
   onAddToCart?: () => void;
 }
 
-const categoryMap: Record<number, { name: string; icon: JSX.Element }> = {
-  1: { name: "Fast Food", icon: <FaHamburger className="w-4 h-4" /> },
-  2: { name: "Salads", icon: <FaLeaf className="w-4 h-4" /> },
-  3: { name: "Desserts", icon: <FaIceCream className="w-4 h-4" /> },
-  4: { name: "Drinks", icon: <FaGlassMartiniAlt className="w-4 h-4" /> },
+export const categoryMap: Record<Category, { name: string; icon: string }> = {
+  FAST_FOOD: {
+    name: "Fast Food",
+    icon: "https://img.icons8.com/?size=100&id=DbH0FbjXLLIZ&format=png&color=ffffff"
+  },
+  SALADS: {
+    name: "Salads",
+    icon: "https://img.icons8.com/?size=100&id=WhCAJ2GOgHnN&format=png&color=ffffff"
+  },
+  DESSERTS: {
+    name: "Desserts",
+    icon: "https://img.icons8.com/?size=100&id=1g4hL99Duiau&format=png&color=ffffff"
+  },
+  DRINKS: {
+    name: "Drinks",
+    icon: "https://img.icons8.com/?size=100&id=45816&format=png&color=ffffff"
+  }
 };
+
 
 export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
   const category = categoryMap[food.category];
+  const relativeDate = formatDistanceToNow(new Date(food.createdAt), { addSuffix: true });
 
   return (
     <div className="!w-full bg-background-secondry rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-border group">
-      <div className="relative w-full h-60 overflow-hidden rounded-2xl group">
+      {/* Image Section */}
+      <div className="relative w-full h-60 overflow-hidden">
         <Image
           src={food.image}
           alt={food.name}
           width={1080}
           height={1080}
-          className="w-full h-full transform transition-transform duration-300 group-hover:scale-105"
+          className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-
-        <div className="absolute top-3 left-3 bg-primary/90 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 select-none">
+        {/* Category */}
+        <div className="absolute top-3 left-3 bg-primary/90 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 select-none shadow-md">
           {category?.icon}
           <span>{category?.name}</span>
         </div>
       </div>
-      <div className="p-6 flex flex-col gap-2">
+
+      {/* Content */}
+      <div className="p-5 flex flex-col gap-3">
+        {/* Title & Rating */}
         <div className="flex justify-between items-start">
-          <h2 className="text-xl font-bold text-card-foreground truncate max-w-[70%]">
+          <h2 className="text-lg font-bold text-card-foreground truncate max-w-[70%]">
             {food.name}
           </h2>
-          <div className="flex items-center gap-[2px] mb-1">
+          <div className="flex items-center gap-[2px]">
             {Array.from({ length: 5 }, (_, i) => {
               const full = i + 1 <= Math.floor(food.star);
               const half = !full && i + 0.5 < food.star;
               return (
                 <Star
                   key={i}
-                  className={`w-4 h-4 ${
-                    full
+                  className={`w-4 h-4 ${full
                       ? "fill-secondary text-secondary"
                       : half
-                      ? "text-primary/50 fill-primary/20"
-                      : "text-primary/50 fill-primary/20"
-                  }`}
+                        ? "text-primary/50 fill-primary/20"
+                        : "text-primary/50 fill-primary/20"
+                    }`}
                 />
               );
             })}
           </div>
         </div>
 
-        <p className="text-muted-foreground text-sm truncate w-full mb-3">
-          {food.desc}
-        </p>
+        {/* Description */}
+        <p className="text-muted-foreground text-sm truncate">{food.desc}</p>
 
-        <div className="flex justify-between items-center ">
-          <div className="flex items-center gap-1 cursor-pointer">
+        {/* Shop & Price */}
+        <div className="flex justify-between items-center  pt-3">
+          <Link href={`/shop/${food.shop.id}`} className="flex items-center gap-2 group">
             <img
               src={food.shop.image}
               alt={food.shop.name}
-              className="w-6 h-6 rounded-full object-cover border border-border"
+              className="w-7 h-7 rounded-full object-cover border border-border"
               loading="lazy"
             />
-            <span className="text-card-foreground font-bold hover:text-primary">
+            <span className="text-card-foreground font-semibold group-hover:text-primary transition-colors">
               {food.shop.name}
             </span>
-          </div>
-          <div className="text-secondary font-bold text-xl">
-            {food.Price}$
-          </div>
+          </Link>
+          <div className="text-secondary font-bold text-lg">{food.price}$</div>
         </div>
 
-        <div className="flex justify-between items-center mt-3 text-xs text-muted-foreground border-t border-border pt-4">
-          <div className="text-muted-foreground">
-            {new Date(food.createdAt).toLocaleDateString("en-US")}
-          </div>
-          <button
-            onClick={onAddToCart}
-            className="text-sm cursor-pointer bg-primary hover:bg-secondary text-white font-semibold px-4 py-1.5 rounded-full shadow-md transition-all duration-300 hover:scale-105"
-            aria-label={`Add ${food.name} to cart`}
-          >
-            Add to Cart
-          </button>
-          <Link href={`/foods/${food.id}`}>
+        {/* Date, Buttons */}
+        <div className="flex justify-between items-center border-t border-border pt-3 text-xs text-muted-foreground">
+          <span>{relativeDate}</span>
+          <div className="flex gap-2">
             <button
-              className="text-sm cursor-pointer bg-primary hover:bg-secondary text-white font-semibold px-4 py-1.5 rounded-full shadow-md transition-all duration-300 hover:scale-105"
-              aria-label={`View ${food.name} detail`}
+              onClick={onAddToCart}
+              className="bg-primary hover:bg-primary/90 text-white font-medium px-3 py-1 rounded-full shadow-md transition-all duration-200 hover:scale-105 text-xs"
             >
-              View Food
+              Add to Cart
             </button>
-          </Link>
+            <Link href={`/foods/${food.id}`}>
+              <button className="bg-primary hover:bg-primary/90 text-white font-medium px-3 py-1 rounded-full shadow-md transition-all duration-200 hover:scale-105 text-xs">
+                View Details
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
