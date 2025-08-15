@@ -333,6 +333,18 @@ exports.Prisma.RestaurantsScalarFieldEnum = {
   created_at: 'created_at'
 };
 
+exports.Prisma.ShoppingCartScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+};
+
+exports.Prisma.ShoppingCartItemScalarFieldEnum = {
+  id: 'id',
+  cartId: 'cartId',
+  foodId: 'foodId',
+  quantity: 'quantity'
+};
+
 exports.Prisma.CommentsScalarFieldEnum = {
   id: 'id',
   msg: 'msg',
@@ -430,6 +442,8 @@ exports.Prisma.ModelName = {
   users: 'users',
   Food: 'Food',
   Restaurants: 'Restaurants',
+  ShoppingCart: 'ShoppingCart',
+  ShoppingCartItem: 'ShoppingCartItem',
   Comments: 'Comments'
 };
 

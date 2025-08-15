@@ -16,8 +16,8 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
         <Image
           src={food.image}
           alt={food.name}
-          width={1080}
-          height={1080}
+          fill
+          unoptimized
           className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
@@ -75,9 +75,7 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
               {food.shop.name}
             </span>
           </Link>
-          <div className="text-secondary font-bold text-lg">
-            ${food.price}
-          </div>
+          <div className="text-secondary font-bold text-lg">${food.price}</div>
         </div>
 
         {/* Actions */}

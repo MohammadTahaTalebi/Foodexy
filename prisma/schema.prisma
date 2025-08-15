@@ -331,18 +331,19 @@ model users {
 }
 
 model Food {
-  id         Int         @id @default(autoincrement())
+  id         Int                @id @default(autoincrement())
   name       String
   desc       String
-  star       Float       @default(0)
+  star       Float              @default(0)
   price      Float
-  createdAt  DateTime    @default(now())
+  createdAt  DateTime           @default(now())
   category   Category
   image      String
   shopId     Int
-  created_at DateTime    @default(now())
+  created_at DateTime           @default(now())
   comments   Comments[]
-  shop       Restaurants @relation(fields: [shopId], references: [id])
+  shop       Restaurants        @relation(fields: [shopId], references: [id])
+  cartItems  ShoppingCartItem[] @relation(name: "ShoppingCartItemToFood")
 
   @@schema("public")
 }
@@ -354,6 +355,25 @@ model Restaurants {
   ownerId    String   @db.Uuid
   created_at DateTime @default(now())
   foods      Food[]
+
+  @@schema("public")
+}
+
+model ShoppingCart {
+  id     Int                @id @default(autoincrement())
+  userId String             @db.Uuid
+  items  ShoppingCartItem[]
+
+  @@schema("public")
+}
+
+model ShoppingCartItem {
+  id       Int          @id @default(autoincrement())
+  cartId   Int
+  foodId   Int
+  quantity Int          @default(1)
+  cart     ShoppingCart @relation(fields: [cartId], references: [id])
+  food     Food         @relation(fields: [foodId], references: [id], name: "ShoppingCartItemToFood")
 
   @@schema("public")
 }
