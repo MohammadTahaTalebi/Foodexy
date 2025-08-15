@@ -21153,7 +21153,7 @@ export namespace Prisma {
       name: string
       desc: string
       star: number
-      Price: number
+      price: number
       createdAt: Date
       category: $Enums.Category
       image: string

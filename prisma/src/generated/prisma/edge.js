@@ -415,7 +415,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\project\\next project\\Project\\Foodexy\\prisma\\src\\generated\\prisma",
+      "value": "C:\\Users\\navid\\programming\\GitHub\\MyRepoes\\Next\\Foodexy\\prisma\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -431,7 +431,7 @@ const config = {
     "previewFeatures": [
       "clientExtensions"
     ],
-    "sourceFilePath": "D:\\project\\next project\\Project\\Foodexy\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\navid\\programming\\GitHub\\MyRepoes\\Next\\Foodexy\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

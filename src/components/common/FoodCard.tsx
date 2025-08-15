@@ -2,23 +2,19 @@ import { Star } from "lucide-react";
 import Image from "next/image";
 import { Food, Restaurants } from "../../../prisma/src/generated/prisma";
 import Link from "next/link";
-import { FaHamburger, FaLeaf, FaIceCream, FaGlassMartiniAlt } from "react-icons/fa";
+import {
+  FaHamburger,
+  FaLeaf,
+  FaIceCream,
+  FaGlassMartiniAlt,
+} from "react-icons/fa";
 
 interface FoodCardProps {
   food: Food & { shop: Restaurants };
   onAddToCart?: () => void;
 }
 
-const categoryMap: Record<number, { name: string; icon: JSX.Element }> = {
-  1: { name: "Fast Food", icon: <FaHamburger className="w-4 h-4" /> },
-  2: { name: "Salads", icon: <FaLeaf className="w-4 h-4" /> },
-  3: { name: "Desserts", icon: <FaIceCream className="w-4 h-4" /> },
-  4: { name: "Drinks", icon: <FaGlassMartiniAlt className="w-4 h-4" /> },
-};
-
 export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
-  const category = categoryMap[food.category];
-
   return (
     <div className="!w-full bg-background-secondry rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-border group">
       <div className="relative w-full h-60 overflow-hidden rounded-2xl group">
@@ -33,8 +29,7 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
 
         <div className="absolute top-3 left-3 bg-primary/90 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 select-none">
-          {category?.icon}
-          <span>{category?.name}</span>
+          <span>{food.category}</span>
         </div>
       </div>
       <div className="p-6 flex flex-col gap-2">
@@ -78,9 +73,7 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
               {food.shop.name}
             </span>
           </div>
-          <div className="text-secondary font-bold text-xl">
-            {food.Price}$
-          </div>
+          <div className="text-secondary font-bold text-xl">{food.price}$</div>
         </div>
 
         <div className="flex justify-between items-center mt-3 text-xs text-muted-foreground border-t border-border pt-4">
