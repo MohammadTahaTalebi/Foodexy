@@ -350,6 +350,7 @@ model Food {
 model Restaurants {
   id         Int      @id @default(autoincrement())
   name       String
+  desc       String
   image      String
   ownerId    String   @db.Uuid
   created_at DateTime @default(now())
