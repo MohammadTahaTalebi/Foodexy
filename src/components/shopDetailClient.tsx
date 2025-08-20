@@ -1,20 +1,25 @@
 "use client";
 
-import { useState } from "react";
 import FoodCard from "@/components/common/FoodCard";
+import { IceCream, Martini, Pizza, Salad } from "lucide-react";
 import Image from "next/image";
-import { FaGlassMartiniAlt, FaHamburger, FaIceCream, FaLeaf } from "react-icons/fa";
+import { useState } from "react";
+import { FaHamburger } from "react-icons/fa";
+import { FaBowlRice } from "react-icons/fa6";
+import { GiNoodles } from "react-icons/gi";
 import { IoFastFoodSharp } from "react-icons/io5";
 import { Food, Restaurants } from "../../prisma/src/generated/prisma";
 
-const categories = [
+export const categories = [
   { key: "popular", name: "Popular", icon: <IoFastFoodSharp className="w-5 h-5" /> },
-  { key: "fastfood", name: "Fast Food", icon: <FaHamburger className="w-5 h-5" />, filter: 1 },
-  { key: "salads", name: "Salads", icon: <FaLeaf className="w-5 h-5" />, filter: 2 },
-  { key: "desserts", name: "Desserts", icon: <FaIceCream className="w-5 h-5" />, filter: 3 },
-  { key: "drinks", name: "Drinks", icon: <FaGlassMartiniAlt className="w-5 h-5" />, filter: 4 },
+  { key: "pizza", name: "Pizza", icon: <Pizza className="w-5 h-5" />, filter: "PIZZA" },
+  { key: "pasta", name: "Pasta", icon: <GiNoodles className="w-5 h-5" />, filter: "PASTA" },
+  { key: "sushi", name: "Sushi", icon: <FaBowlRice className="w-5 h-5" />, filter: "SOUSHI" },
+  { key: "burger", name: "Burger", icon: <FaHamburger className="w-5 h-5" />, filter: "BURGER" },
+  { key: "salads", name: "Salads", icon: <Salad className="w-5 h-5" />, filter: "SALAD" },
+  { key: "desserts", name: "Desserts", icon: <IceCream className="w-5 h-5" />, filter: "DESSERT" },
+  { key: "drinks", name: "Drinks", icon: <Martini className="w-5 h-5" />, filter: "DRINK" },
 ];
-
 
 interface Props {
   currentShop: Restaurants;
@@ -24,6 +29,17 @@ interface Props {
 export default function ShopDetailClient({ currentShop, foods }: Props) {
   const [activeCategory, setActiveCategory] = useState("popular");
 
+  const availableCategories = categories.filter(cat => {
+    if (cat.key === "popular") return foods.length > 0;
+    return foods.some(f => f.category === cat.filter);
+  });
+
+  const filteredFoods =
+    activeCategory === "popular"
+      ? [...foods]
+        .sort((a, b) => b.star - a.star)
+        .slice(0, 5)
+      : foods.filter((f) => f.category === categories.find((c) => c.key === activeCategory)?.filter);
 
   return (
     <div className="bg-background min-h-screen py-10 px-4 md:px-20">
@@ -59,7 +75,7 @@ export default function ShopDetailClient({ currentShop, foods }: Props) {
       {/* Categories */}
       <div className="max-w-7xl mx-auto mt-10">
         <div className="flex flex-wrap gap-3 border-b border-border pb-4">
-          {categories.map((cat) => (
+          {availableCategories.map((cat) => (
             <button
               key={cat.key}
               onClick={() => setActiveCategory(cat.key)}
@@ -75,9 +91,9 @@ export default function ShopDetailClient({ currentShop, foods }: Props) {
 
         {/* Foods */}
         <div className="mt-8">
-          {foods.length > 0 ? (
+          {filteredFoods.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {foods.map((food) => (
+              {filteredFoods.map((food) => (
                 <FoodCard key={food.id} food={{ ...food, shop: currentShop }} />
               ))}
             </div>

@@ -342,6 +342,18 @@ exports.Prisma.CommentsScalarFieldEnum = {
   created_at: 'created_at'
 };
 
+exports.Prisma.ShoppingCartScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId'
+};
+
+exports.Prisma.ShoppingCartItemScalarFieldEnum = {
+  id: 'id',
+  cartId: 'cartId',
+  foodId: 'foodId',
+  quantity: 'quantity'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -403,10 +415,12 @@ exports.aal_level = exports.$Enums.aal_level = {
 };
 
 exports.Category = exports.$Enums.Category = {
-  FAST_FOOD: 'FAST_FOOD',
-  SALADS: 'SALADS',
-  DESSERTS: 'DESSERTS',
-  DRINKS: 'DRINKS'
+  DESSERT: 'DESSERT',
+  PIZZA: 'PIZZA',
+  PASTA: 'PASTA',
+  DRINK: 'DRINK',
+  SOUSHI: 'SOUSHI',
+  BURGER: 'BURGER'
 };
 
 exports.Prisma.ModelName = {
@@ -428,7 +442,9 @@ exports.Prisma.ModelName = {
   users: 'users',
   Food: 'Food',
   Restaurants: 'Restaurants',
-  Comments: 'Comments'
+  Comments: 'Comments',
+  ShoppingCart: 'ShoppingCart',
+  ShoppingCartItem: 'ShoppingCartItem'
 };
 
 /**

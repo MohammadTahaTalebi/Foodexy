@@ -1,7 +1,10 @@
-import { Star } from "lucide-react";
-import { FaHamburger, FaLeaf, FaIceCream, FaGlassMartiniAlt } from "react-icons/fa";
-import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
+import { IceCream, Martini, Pizza, Salad, Star } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { FaHamburger } from "react-icons/fa";
+import { FaBowlRice } from "react-icons/fa6"; 
+import { GiNoodles } from "react-icons/gi";
 import { Category, Food, Restaurants } from "../../../prisma/src/generated/prisma";
 
 interface FoodCardProps {
@@ -10,10 +13,34 @@ interface FoodCardProps {
 }
 
 export const categoryMap: Record<Category, { name: string; icon: JSX.Element }> = {
-  PIZZA: { name: "Fast Food", icon: <FaHamburger className="w-4 h-4" /> },
-  SALADS: { name: "Salads", icon: <FaLeaf className="w-4 h-4" /> },
-  DESSERTS: { name: "Desserts", icon: <FaIceCream className="w-4 h-4" /> },
-  DRINKS: { name: "Drinks", icon: <FaGlassMartiniAlt className="w-4 h-4" /> },
+  PIZZA: {
+    name: "Pizza",
+    icon: <Pizza className="w-4 h-4" />,
+  },
+  PASTA: {
+    name: "Pasta",
+    icon: <GiNoodles className="w-4 h-4" />,
+  },
+  SOUSHI: {
+    name: "Sushi",
+    icon: <FaBowlRice className="w-4 h-4" />,
+  },
+  BURGER: {
+    name: "Burger",
+    icon: <FaHamburger className="w-4 h-4" />,
+  },
+  DESSERT: {
+    name: "Desserts",
+    icon: <IceCream className="w-4 h-4" />,
+  },
+  DRINK: {
+    name: "Drinks",
+    icon: <Martini className="w-4 h-4" />,
+  },
+  SALAD: {
+    name: "Salads",
+    icon: <Salad className="w-4 h-4" />,
+  },
 };
 
 export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
@@ -24,9 +51,11 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
     <div className="!w-full bg-background-secondry rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-border group">
       {/* Image Section */}
       <div className="relative w-full h-60 overflow-hidden">
-        <img
+        <Image
           src={food.image}
           alt={food.name}
+          width={1080}
+          height={1080}
           className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
@@ -57,7 +86,7 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
                     : half
                       ? "text-primary/50 fill-primary/20"
                       : "text-primary/50 fill-primary/20"
-                  }`}
+                    }`}
                 />
               );
             })}
@@ -70,11 +99,12 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
         {/* Shop & Price */}
         <div className="flex justify-between items-center  pt-3">
           <Link href={`/shop/${food.shop.id}`} className="flex items-center gap-2 group">
-            <img
+            <Image
               src={food.shop.image}
               alt={food.shop.name}
-              className="w-7 h-7 rounded-full object-cover border border-border"
-              loading="lazy"
+              className="w-7 h-7 rounded-full object-cover border-2 border-primary"
+              width={1080}
+              height={1080}
             />
             <span className="text-card-foreground font-semibold group-hover:text-primary transition-colors">
               {food.shop.name}

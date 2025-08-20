@@ -435,10 +435,12 @@ enum one_time_token_type {
 }
 
 enum Category {
-  FASTFOOD
-  SALAD
   DESSERT
+  PIZZA
+  PASTA
   DRINK
+  SOUSHI
+  BURGER
 
   @@schema("public")
 }
