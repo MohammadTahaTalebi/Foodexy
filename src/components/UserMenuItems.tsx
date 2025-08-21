@@ -23,7 +23,7 @@ const UserMenuItems = () => {
     <div
       key={item.text}
       onClick={item.onclick}
-      className="h-10 p-2 hover:bg-muted w-full cursor-pointer text-sm text-foreground flex gap-2 items-center rounded hover:text-primary font-normal"
+      className="h-10 p-2 hover:bg-muted w-full cursor-pointer text-[15px] text-foreground flex gap-2 items-center rounded hover:text-primary font-normal"
     >
       {item.icon} {item.text}
     </div>

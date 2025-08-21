@@ -11,6 +11,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { ThemeToggle } from "./ThemeToggle";
 import UserProfile from "./UserProfile";
 import UserMenuItems from "../UserMenuItems";
+import ShoppingCartPopover from "../ShoppingCartPopover";
 
 export default function HeaderClient({ email }: { email: string }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -70,6 +71,7 @@ export default function HeaderClient({ email }: { email: string }) {
                                         <span className="text-muted-foreground text-[13px]">{email}</span>
                                     </div>
                                 </div>
+                                <ShoppingCartPopover />
                                 <UserMenuItems />
                             </div>
                         </PopoverContent>

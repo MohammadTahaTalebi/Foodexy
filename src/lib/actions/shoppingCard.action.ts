@@ -2,19 +2,30 @@
 
 import { prisma } from "../prisma";
 
-export async function createCartItem(cartId: number, foodId: number, quantity: number) {
+export async function createOrBumpCartItem(
+  cartId: number,
+  foodId: number,
+  quantity = 1
+) {
+  const existing = await prisma.shoppingCartItem.findFirst({
+    where: { cartId, foodId },
+  });
+
+  if (existing) {
+    return prisma.shoppingCartItem.update({
+      where: { id: existing.id },
+      data: { quantity: existing.quantity + quantity },
+    });
+  }
+
   return prisma.shoppingCartItem.create({
-    data: {
-      id: Date.now() /1000, 
-      cartId,
-      foodId,
-      quantity,
-    },
+    data: { cartId, foodId, quantity },
   });
 }
 
-export async function getCartItems() {
+export async function getCartItems(UserCartId: number) {
   return prisma.shoppingCartItem.findMany({
+    where: { cartId: UserCartId },
     orderBy: { id: "desc" },
   });
 }
@@ -32,3 +43,12 @@ export async function deleteCartItem(id: number) {
   });
 }
 
+export async function getOrCreateCartByUserId(userId?: number) {
+  const id = userId ?? Math.floor(Date.now());
+
+  return await prisma.shoppingCart.upsert({
+    where: { userId: id },
+    update: {},
+    create: { userId: id },
+  });
+}

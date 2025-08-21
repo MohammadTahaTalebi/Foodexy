@@ -1,55 +1,65 @@
-import { formatDistanceToNow } from "date-fns";
-import { IceCream, Martini, Pizza, Salad, Star } from "lucide-react";
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { formatDistanceToNow } from "date-fns";
+import { Star, Pizza, Salad, Martini, IceCream } from "lucide-react";
 import { FaHamburger } from "react-icons/fa";
-import { FaBowlRice } from "react-icons/fa6"; 
+import { FaBowlRice } from "react-icons/fa6";
 import { GiNoodles } from "react-icons/gi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { Category, Food, Restaurants } from "../../../prisma/src/generated/prisma";
+import { getOrCreateCartByUserId, createOrBumpCartItem } from "@/lib/actions/shoppingCard.action";
+import { createClient } from "@/lib/supabase/client";
+
+export const categoryMap: Record<Category, { name: string; icon: JSX.Element }> = {
+  PIZZA: { name: "Pizza", icon: <Pizza className="w-4 h-4" /> },
+  PASTA: { name: "Pasta", icon: <GiNoodles className="w-4 h-4" /> },
+  SOUSHI: { name: "Sushi", icon: <FaBowlRice className="w-4 h-4" /> },
+  BURGER: { name: "Burger", icon: <FaHamburger className="w-4 h-4" /> },
+  DESSERT: { name: "Desserts", icon: <IceCream className="w-4 h-4" /> },
+  DRINK: { name: "Drinks", icon: <Martini className="w-4 h-4" /> },
+  SALAD: { name: "Salads", icon: <Salad className="w-4 h-4" /> },
+};
 
 interface FoodCardProps {
   food: Food & { shop: Restaurants };
-  onAddToCart?: () => void;
 }
 
-export const categoryMap: Record<Category, { name: string; icon: JSX.Element }> = {
-  PIZZA: {
-    name: "Pizza",
-    icon: <Pizza className="w-4 h-4" />,
-  },
-  PASTA: {
-    name: "Pasta",
-    icon: <GiNoodles className="w-4 h-4" />,
-  },
-  SOUSHI: {
-    name: "Sushi",
-    icon: <FaBowlRice className="w-4 h-4" />,
-  },
-  BURGER: {
-    name: "Burger",
-    icon: <FaHamburger className="w-4 h-4" />,
-  },
-  DESSERT: {
-    name: "Desserts",
-    icon: <IceCream className="w-4 h-4" />,
-  },
-  DRINK: {
-    name: "Drinks",
-    icon: <Martini className="w-4 h-4" />,
-  },
-  SALAD: {
-    name: "Salads",
-    icon: <Salad className="w-4 h-4" />,
-  },
-};
-
-export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
+export default function FoodCard({ food }: FoodCardProps) {
   const category = categoryMap[food.category];
   const relativeDate = formatDistanceToNow(new Date(food.createdAt), { addSuffix: true });
+  const [loading, setLoading] = useState(false);
+  const supabase = createClient();
+
+  const handleAddToCart = async () => {
+    try {
+      setLoading(true);
+
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      if (userError || !userData?.user) {
+        toast.error("You must be logged in to add items to your cart.");
+        return;
+      }
+      const userId = userData.user.id;
+
+      const cart = await getOrCreateCartByUserId(userId);
+      await createOrBumpCartItem(cart.id, food.id, 1);
+
+      toast.success(`${food.name} has been added to your cart.`);
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="!w-full bg-background-secondry rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-border group">
-      {/* Image Section */}
       <div className="relative w-full h-60 overflow-hidden">
         <Image
           src={food.image}
@@ -59,21 +69,15 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
           className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-
-        {/* Category */}
         <div className="absolute top-3 left-3 bg-primary/90 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 select-none shadow-md">
           {category?.icon}
           <span>{category?.name}</span>
         </div>
       </div>
 
-      {/* Content */}
       <div className="p-5 flex flex-col gap-3">
-        {/* Title & Rating */}
         <div className="flex justify-between items-start">
-          <h2 className="text-lg font-bold text-card-foreground truncate max-w-[70%]">
-            {food.name}
-          </h2>
+          <h2 className="text-lg font-bold text-card-foreground truncate max-w-[70%]">{food.name}</h2>
           <div className="flex items-center gap-[2px]">
             {Array.from({ length: 5 }, (_, i) => {
               const full = i + 1 <= Math.floor(food.star);
@@ -82,10 +86,10 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
                 <Star
                   key={i}
                   className={`w-4 h-4 ${full
-                    ? "fill-secondary text-secondary"
-                    : half
-                      ? "text-primary/50 fill-primary/20"
-                      : "text-primary/50 fill-primary/20"
+                      ? "fill-secondary text-secondary"
+                      : half
+                        ? "text-primary/50 fill-primary/20"
+                        : "text-primary/50 fill-primary/20"
                     }`}
                 />
               );
@@ -93,11 +97,9 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
           </div>
         </div>
 
-        {/* Description */}
         <p className="text-muted-foreground text-sm truncate">{food.desc}</p>
 
-        {/* Shop & Price */}
-        <div className="flex justify-between items-center  pt-3">
+        <div className="flex justify-between items-center pt-3">
           <Link href={`/shop/${food.shop.id}`} className="flex items-center gap-2 group">
             <Image
               src={food.shop.image}
@@ -110,18 +112,18 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
               {food.shop.name}
             </span>
           </Link>
-          <div className="text-secondary font-bold text-lg">{food.price}$</div>
+          <div className="text-secondary font-bold text-lg">${food.price}</div>
         </div>
 
-        {/* Date, Buttons */}
         <div className="flex justify-between items-center border-t border-border pt-3 text-xs text-muted-foreground">
           <span>{relativeDate}</span>
           <div className="flex gap-2">
             <button
-              onClick={onAddToCart}
-              className="bg-primary hover:bg-primary/90 text-white font-medium px-3 py-1 rounded-full shadow-md transition-all duration-200 hover:scale-105 text-xs"
+              onClick={handleAddToCart}
+              disabled={loading}
+              className="bg-primary hover:bg-primary/90 text-white font-medium px-3 py-1 rounded-full shadow-md transition-all duration-200 hover:scale-105 text-xs disabled:opacity-50"
             >
-              Add to Cart
+              {loading ? "Adding..." : "Add to Cart"}
             </button>
             <Link href={`/foods/${food.id}`}>
               <button className="bg-primary hover:bg-primary/90 text-white font-medium px-3 py-1 rounded-full shadow-md transition-all duration-200 hover:scale-105 text-xs">
@@ -131,6 +133,8 @@ export default function FoodCard({ food, onAddToCart }: FoodCardProps) {
           </div>
         </div>
       </div>
+
+      <ToastContainer position="top-center" />
     </div>
   );
 }
