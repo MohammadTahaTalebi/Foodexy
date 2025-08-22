@@ -12,7 +12,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Category, Food, Restaurants } from "../../../prisma/src/generated/prisma";
-import { getOrCreateCartByUserId, createOrBumpCartItem } from "@/lib/actions/shoppingCard.action";
+import {
+  getOrCreateCartByUserId,
+  createOrBumpCartItem,
+  findCartItem,
+} from "@/lib/actions/shoppingCard.action";
 import { createClient } from "@/lib/supabase/client";
 
 export const categoryMap: Record<Category, { name: string; icon: JSX.Element }> = {
@@ -38,18 +42,20 @@ export default function FoodCard({ food }: FoodCardProps) {
   const handleAddToCart = async () => {
     try {
       setLoading(true);
-
       const { data: userData, error: userError } = await supabase.auth.getUser();
       if (userError || !userData?.user) {
         toast.error("You must be logged in to add items to your cart.");
         return;
       }
       const userId = userData.user.id;
-
       const cart = await getOrCreateCartByUserId(userId);
+      const existingItem = await findCartItem(userId, food.id);
+      if (existingItem) {
+        toast.info(`${food.name} is already in your cart.`);
+        return;
+      }
       await createOrBumpCartItem(cart.id, food.id, 1);
-
-      toast.success(`${food.name} has been added to your cart.`);
+      toast.success(`${food.name} added to your cart`);
     } catch (err) {
       console.error(err);
       toast.error("Something went wrong. Please try again.");
@@ -60,6 +66,7 @@ export default function FoodCard({ food }: FoodCardProps) {
 
   return (
     <div className="!w-full bg-background-secondry rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-border group">
+      {/* Image */}
       <div className="relative w-full h-60 overflow-hidden">
         <Image
           src={food.image}
@@ -75,30 +82,37 @@ export default function FoodCard({ food }: FoodCardProps) {
         </div>
       </div>
 
+      {/* Content */}
       <div className="p-5 flex flex-col gap-3">
+        {/* Title & Rating */}
         <div className="flex justify-between items-start">
-          <h2 className="text-lg font-bold text-card-foreground truncate max-w-[70%]">{food.name}</h2>
-          <div className="flex items-center gap-[2px]">
+          <h2 className="text-lg font-bold text-card-foreground truncate max-w-[70%]">
+            {food.name}
+          </h2>
+          <div className="flex my-auto items-center gap-[2px]">
             {Array.from({ length: 5 }, (_, i) => {
               const full = i + 1 <= Math.floor(food.star);
               const half = !full && i + 0.5 < food.star;
               return (
                 <Star
                   key={i}
-                  className={`w-4 h-4 ${full
+                  className={`w-4 h-4 ${
+                    full
                       ? "fill-secondary text-secondary"
                       : half
-                        ? "text-primary/50 fill-primary/20"
-                        : "text-primary/50 fill-primary/20"
-                    }`}
+                      ? "text-primary/50 fill-primary/20"
+                      : "text-primary/50 fill-primary/20"
+                  }`}
                 />
               );
             })}
           </div>
         </div>
 
+        {/* Description */}
         <p className="text-muted-foreground text-sm truncate">{food.desc}</p>
 
+        {/* Shop & Price */}
         <div className="flex justify-between items-center pt-3">
           <Link href={`/shop/${food.shop.id}`} className="flex items-center gap-2 group">
             <Image
@@ -115,26 +129,25 @@ export default function FoodCard({ food }: FoodCardProps) {
           <div className="text-secondary font-bold text-lg">${food.price}</div>
         </div>
 
+        {/* Buttons */}
         <div className="flex justify-between items-center border-t border-border pt-3 text-xs text-muted-foreground">
           <span>{relativeDate}</span>
           <div className="flex gap-2">
             <button
               onClick={handleAddToCart}
               disabled={loading}
-              className="bg-primary hover:bg-primary/90 text-white font-medium px-3 py-1 rounded-full shadow-md transition-all duration-200 hover:scale-105 text-xs disabled:opacity-50"
+              className="bg-primary cursor-pointer hover:bg-primary/90 text-white font-medium px-3 py-1 rounded-full shadow-md transition-all duration-200 hover:scale-105 text-xs disabled:opacity-50"
             >
               {loading ? "Adding..." : "Add to Cart"}
             </button>
             <Link href={`/foods/${food.id}`}>
-              <button className="bg-primary hover:bg-primary/90 text-white font-medium px-3 py-1 rounded-full shadow-md transition-all duration-200 hover:scale-105 text-xs">
+              <button className="bg-primary cursor-pointer hover:bg-primary/90 text-white font-medium px-3 py-1 rounded-full shadow-md transition-all duration-200 hover:scale-105 text-xs">
                 View Details
               </button>
             </Link>
           </div>
         </div>
       </div>
-
-      <ToastContainer position="top-center" />
     </div>
   );
 }

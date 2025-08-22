@@ -1,4 +1,3 @@
-// app/shop/page.tsx
 import ShopCard from "@/components/common/ShopCard";
 import { getAllShops } from "@/lib/actions/shops.action";
 

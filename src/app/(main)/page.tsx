@@ -1,76 +1,31 @@
-import FoodCard from "@/components/common/FoodCard";
-import { Star } from "lucide-react";
+import PopularSlider from "@/components/PopularSlider";
+import ReviewSlider from "@/components/ReviewSlider";
+import { getLandingComments } from "@/lib/actions/landingComments.action";
+import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import { FaClock, FaFacebookF, FaInstagram, FaShieldAlt, FaShoppingCart, FaSmile, FaStar, FaTruck, FaTwitter, FaUtensils, FaYoutube } from "react-icons/fa";
+import { FaClock, FaGlassMartiniAlt, FaHamburger, FaIceCream, FaLeaf, FaShieldAlt, FaShoppingCart, FaSmile, FaStar, FaTruck, FaUtensils } from "react-icons/fa";
 
-import { FaGlassMartiniAlt, FaHamburger, FaIceCream, FaLeaf } from "react-icons/fa";
 
 const categories = [
-  { name: "Fast Food", icon: <FaHamburger className="w-15 h-15" />, url: "/foods?filter=1" },
-  { name: "Salads", icon: <FaLeaf className="w-15 h-15" />, url: "/foods?filter=2" },
-  { name: "Desserts", icon: <FaIceCream className="w-15 h-15" />, url: "/foods?filter=3" },
-  { name: "Drinks", icon: <FaGlassMartiniAlt className="w-15 h-15" />, url: "/foods?filter=4" },
+  { name: "Fast Food", icon: <FaHamburger className="w-15 h-15" />, url: "/foods?category=FAST_FOOD" },
+  { name: "Salads", icon: <FaLeaf className="w-15 h-15" />, url: "/foods?category=SALAD" },
+  { name: "Desserts", icon: <FaIceCream className="w-15 h-15" />, url: "/foods?category=DESSERT" },
+  { name: "Drinks", icon: <FaGlassMartiniAlt className="w-15 h-15" />, url: "/foods?category=DRINK" },
 ];
 
 export default async function HomePage() {
 
+  const popularFoods = await prisma.food.findMany({
+    take: 6,
+    orderBy: {
+      star: "desc",
+    },
+    include: {
+      shop: true,
+    },
+  });
 
-  const popularFoods = [
-    {
-      name: "Cheese Burger",
-      desc: "Juicy beef burger with melted cheese, lettuce, and tomato.",
-      Star: 4.5,
-      Price: 8.99,
-      createdAt: "2025-08-10",
-      category: 1,
-      image: "https://ghazaland.com/wp-content/uploads/2018/04/cheesberger.jpg",
-      shop: { name: "Ope", picture: "https://epls.b-cdn.net/wp-content/uploads/2018/10/IMG_3155.jpg" }
-    },
-    {
-      name: "Caesar Salad",
-      desc: "Fresh romaine lettuce with Caesar dressing and parmesan.",
-      Star: 4,
-      Price: 6.5,
-      createdAt: "2025-08-09",
-      category: 2,
-      image: "https://images.getrecipekit.com/20220427155305-caesar-salad.jpg?aspect_ratio=16:9&quality=90&",
-      shop: { name: "Ope", picture: "https://epls.b-cdn.net/wp-content/uploads/2018/10/IMG_3155.jpg" }
-    },
-    {
-      name: "Chocolate Cake",
-      desc: "Rich and moist chocolate cake topped with ganache.",
-      Star: 5,
-      Price: 4.75,
-      createdAt: "2025-08-08",
-      category: 3,
-      image: "https://www.hersheyland.com/content/dam/hersheyland/en-us/recipes/recipe-images/40-hersheys-deep-dark-chocolate-cake.jpg",
-      shop: { name: "Ope", picture: "https://epls.b-cdn.net/wp-content/uploads/2018/10/IMG_3155.jpg" }
-    },
-  ];
-
-  const reviews = [
-    {
-      name: "Alex Johnson",
-      msg: "The burgers here are absolutely amazing! Fresh ingredients and perfect seasoning.",
-      rating: 5,
-      date: "2025-07-21T00:00:00Z",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg"
-    },
-    {
-      name: "Sophia Lee",
-      msg: "Loved the salads! Super fresh and full of flavor. Will definitely come back.",
-      rating: 4,
-      date: "2025-06-12T00:00:00Z",
-      avatar: "https://randomuser.me/api/portraits/women/65.jpg"
-    },
-    {
-      name: "Daniel Smith",
-      msg: "Desserts are heavenly. The chocolate lava cake is a must-try!",
-      rating: 5,
-      date: "2025-05-03T00:00:00Z",
-      avatar: "https://randomuser.me/api/portraits/men/44.jpg"
-    }
-  ];
+  const reviews = await getLandingComments();
 
   const steps = [
     {
@@ -171,12 +126,7 @@ export default async function HomePage() {
 
       <section className="py-16 px-6 md:px-20">
         <h2 className="text-3xl font-bold text-center mb-10">Popular Dishes</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {popularFoods.map((food) => (
-            <FoodCard key={food.name} food={food} />
-
-          ))}
-        </div>
+        <PopularSlider foods={popularFoods} />
       </section>
 
       <section className="py-20 bg-background-secondry px-6 md:px-20">
@@ -220,54 +170,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="py-16 px-6 md:px-20">
-        <h2 className="text-3xl font-extrabold text-center mb-12 text-card-foreground">
-          What Our Customers Say
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {reviews.map((review) => (
-            <div
-              key={review.name}
-              className="bg-background p-6 rounded-2xl shadow-lg border border-border hover:shadow-2xl transition-all duration-500 hover:-translate-y-1"
-            >
-              <div className="flex w-full justify-between mb-4">
-
-                <div className="flex items-center gap-2">
-                  <img
-                    src={review.avatar}
-                    alt={review.name}
-                    className="w-10 h-10 rounded-full object-cover border border-border"
-                    loading="lazy"
-                  />
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <p className="font-semibold text-card-foreground">{review.name}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {new Date(review.date).toLocaleDateString("en-US")}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-[2px]">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${i + 1 <= review.rating
-                        ? "fill-secondary text-secondary"
-                        : "text-primary/40 fill-primary/10"
-                        }`}
-                    />
-                  ))}
-                </div>
-              </div>
-              <p className="text-muted-foreground mb-6 leading-relaxed italic h-25 overflow-scroll ">
-                "{review.msg}"
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <ReviewSlider reviews={reviews} />
     </main>
   );
 

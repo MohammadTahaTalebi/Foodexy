@@ -6,16 +6,25 @@ import {
 } from "./../../../prisma/src/generated/prisma/index.d";
 import { prisma } from "../prisma";
 
-export async function getAllFoods() {
-  try {
-    return prisma.food.findMany({
-      include: {
-        shop: true,
+export async function getAllFoods(query?: string) {
+  const params = new URLSearchParams(query);
+  const search = params.get("search") || "";
+  const category = params.get("category");
+  return prisma.food.findMany({
+    where: {
+      name: {
+        contains: search,
+        mode: "insensitive",
       },
-    });
-  } catch (err) {
-    throw err;
-  }
+      ...(category && category !== "ALL" ? { category } : {}),
+    },
+    include: {
+      shop: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 }
 
 export async function getFoodById(foodId: number) {

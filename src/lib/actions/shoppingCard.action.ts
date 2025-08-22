@@ -37,6 +37,17 @@ export async function updateCartItem(id: number, quantity: number) {
   });
 }
 
+export async function findCartItem(userId: string, foodId: number) {
+  const cart = await getOrCreateCartByUserId(userId);
+
+  return prisma.shoppingCartItem.findFirst({
+    where: {
+      cartId: cart.id,
+      foodId,
+    },
+  });
+}
+
 export async function deleteCartItem(id: number) {
   return prisma.shoppingCartItem.delete({
     where: { id },

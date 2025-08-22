@@ -1,14 +1,14 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { FaDollarSign, FaTrash } from "react-icons/fa";
+import { getFoodById } from "@/lib/actions/foods.action";
+import { deleteCartItem, getCartItems, getOrCreateCartByUserId, updateCartItem } from "@/lib/actions/shoppingCard.action";
+import { createClient } from "@/lib/supabase/client";
 import * as Popover from "@radix-ui/react-popover";
 import { ShoppingBag } from "lucide-react";
-import { getCartItems, updateCartItem, deleteCartItem, getOrCreateCartByUserId } from "@/lib/actions/shoppingCard.action";
-import { getFoodById } from "@/lib/actions/foods.action";
+import Image from "next/image";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/client";
+import { useEffect, useState } from "react";
+import { FaDollarSign, FaTrash } from "react-icons/fa";
 
 type FoodType = {
     id: number;
@@ -95,12 +95,33 @@ export default function ShoppingCartPopover() {
                 <h2 className="text-xl font-bold text-card-foreground text-center">
                     Your Cart
                 </h2>
-                <div className="flex flex-colo flex-wrap gap-3 max-h-45 overflow-y-scroll w-full">
+                <div className="flex flex-colo flex-wrap gap-3 max-h-50 overflow-y-scroll w-full">
                     {loading && (
-                        <div className="text-center w-full text-primary py-4">
-                            Loading cart...
+                        <div className="flex flex-col gap-3 w-full mr-3">
+                            {[...Array(2)].map((_, i) => (
+                                <div
+                                    key={i}
+                                    className="flex justify-between w-full gap-3 bg-background-secondry p-3 rounded-xl border border-border animate-pulse"
+                                >
+                                    {/* Image placeholder */}
+                                    <div className="w-[60px] h-[50px] rounded-lg bg-primary/20" />
+
+                                    {/* Content placeholder */}
+                                    <div className="flex-1 space-y-2 mt-3">
+                                        <div className="h-4 bg-primary/20 rounded w-3/4" />
+                                        <div className="h-4 bg-primary/20 rounded w-1/4" />
+                                    </div>
+
+                                    {/* Input + button placeholder */}
+                                    <div className="flex gap-1 items-center">
+                                        <div className="w-10 h-8 bg-primary/20 rounded" />
+                                        <div className="w-8 h-8 bg-primary/20 rounded" />
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     )}
+
 
                     {!loading && !cartItems.length && (
                         <div className="text-center text-muted-foreground py-4">
@@ -116,7 +137,7 @@ export default function ShoppingCartPopover() {
                             >
                                 <Link className="flex items-center gap-3 cursor-pointer h-15" href={`foods/${item.id}`}>
                                     <Image
-                                        src={item.food.image}
+                                        src={item.food.image || "https://www.pallenz.co.nz/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png"}
                                         alt={""}
                                         width={60}
                                         height={60}
@@ -144,7 +165,7 @@ export default function ShoppingCartPopover() {
                                             if (value > 99) value = 99;
                                             handleQuantityChange(item.id, value);
                                         }}
-                                        className="w-12 text-center bg-transparent border-none outline-none p-0 h-auto leading-none text-foreground" />
+                                        className="w-12 text-right bg-transparent border-none outline-none p-0 h-auto leading-none text-foreground" />
                                     <button
                                         onClick={() => handleDelete(item.id)}
                                         className="p-2 text-red-500 hover:text-red-700"
@@ -162,10 +183,7 @@ export default function ShoppingCartPopover() {
                             <FaDollarSign /> {totalPrice.toFixed(2)}
                         </span>
                     </div>
-
-
                 )}
-
             </Popover.Content>
         </Popover.Root>
     );

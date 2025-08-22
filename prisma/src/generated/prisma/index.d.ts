@@ -142,6 +142,11 @@ export type ShoppingCart = $Result.DefaultSelection<Prisma.$ShoppingCartPayload>
  * 
  */
 export type ShoppingCartItem = $Result.DefaultSelection<Prisma.$ShoppingCartItemPayload>
+/**
+ * Model landingComments
+ * 
+ */
+export type landingComments = $Result.DefaultSelection<Prisma.$landingCommentsPayload>
 
 /**
  * Enums
@@ -194,12 +199,12 @@ export type one_time_token_type = (typeof one_time_token_type)[keyof typeof one_
 
 
 export const Category: {
-  DESSERT: 'DESSERT',
-  PIZZA: 'PIZZA',
   PASTA: 'PASTA',
-  DRINK: 'DRINK',
-  SOUSHI: 'SOUSHI',
-  BURGER: 'BURGER'
+  SUSHI: 'SUSHI',
+  PIZZA: 'PIZZA',
+  BURGER: 'BURGER',
+  DESSERT: 'DESSERT',
+  DRINK: 'DRINK'
 };
 
 export type Category = (typeof Category)[keyof typeof Category]
@@ -557,6 +562,16 @@ export class PrismaClient<
     * ```
     */
   get shoppingCartItem(): Prisma.ShoppingCartItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.landingComments`: Exposes CRUD operations for the **landingComments** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LandingComments
+    * const landingComments = await prisma.landingComments.findMany()
+    * ```
+    */
+  get landingComments(): Prisma.landingCommentsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1017,7 +1032,8 @@ export namespace Prisma {
     Restaurants: 'Restaurants',
     Comments: 'Comments',
     ShoppingCart: 'ShoppingCart',
-    ShoppingCartItem: 'ShoppingCartItem'
+    ShoppingCartItem: 'ShoppingCartItem',
+    landingComments: 'landingComments'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1036,7 +1052,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "audit_log_entries" | "flow_state" | "identities" | "instances" | "mfa_amr_claims" | "mfa_challenges" | "mfa_factors" | "one_time_tokens" | "refresh_tokens" | "saml_providers" | "saml_relay_states" | "schema_migrations" | "sessions" | "sso_domains" | "sso_providers" | "users" | "food" | "restaurants" | "comments" | "shoppingCart" | "shoppingCartItem"
+      modelProps: "audit_log_entries" | "flow_state" | "identities" | "instances" | "mfa_amr_claims" | "mfa_challenges" | "mfa_factors" | "one_time_tokens" | "refresh_tokens" | "saml_providers" | "saml_relay_states" | "schema_migrations" | "sessions" | "sso_domains" | "sso_providers" | "users" | "food" | "restaurants" | "comments" | "shoppingCart" | "shoppingCartItem" | "landingComments"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2594,6 +2610,80 @@ export namespace Prisma {
           }
         }
       }
+      landingComments: {
+        payload: Prisma.$landingCommentsPayload<ExtArgs>
+        fields: Prisma.landingCommentsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.landingCommentsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$landingCommentsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.landingCommentsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$landingCommentsPayload>
+          }
+          findFirst: {
+            args: Prisma.landingCommentsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$landingCommentsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.landingCommentsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$landingCommentsPayload>
+          }
+          findMany: {
+            args: Prisma.landingCommentsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$landingCommentsPayload>[]
+          }
+          create: {
+            args: Prisma.landingCommentsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$landingCommentsPayload>
+          }
+          createMany: {
+            args: Prisma.landingCommentsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.landingCommentsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$landingCommentsPayload>[]
+          }
+          delete: {
+            args: Prisma.landingCommentsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$landingCommentsPayload>
+          }
+          update: {
+            args: Prisma.landingCommentsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$landingCommentsPayload>
+          }
+          deleteMany: {
+            args: Prisma.landingCommentsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.landingCommentsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.landingCommentsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$landingCommentsPayload>[]
+          }
+          upsert: {
+            args: Prisma.landingCommentsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$landingCommentsPayload>
+          }
+          aggregate: {
+            args: Prisma.LandingCommentsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLandingComments>
+          }
+          groupBy: {
+            args: Prisma.landingCommentsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LandingCommentsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.landingCommentsCountArgs<ExtArgs>
+            result: $Utils.Optional<LandingCommentsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2707,6 +2797,7 @@ export namespace Prisma {
     comments?: CommentsOmit
     shoppingCart?: ShoppingCartOmit
     shoppingCartItem?: ShoppingCartItemOmit
+    landingComments?: landingCommentsOmit
   }
 
   /* Types for Logging */
@@ -2943,6 +3034,7 @@ export namespace Prisma {
     one_time_tokens: number
     sessions: number
     Comments: number
+    landingComments: number
   }
 
   export type UsersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2951,6 +3043,7 @@ export namespace Prisma {
     one_time_tokens?: boolean | UsersCountOutputTypeCountOne_time_tokensArgs
     sessions?: boolean | UsersCountOutputTypeCountSessionsArgs
     Comments?: boolean | UsersCountOutputTypeCountCommentsArgs
+    landingComments?: boolean | UsersCountOutputTypeCountLandingCommentsArgs
   }
 
   // Custom InputTypes
@@ -2997,6 +3090,13 @@ export namespace Prisma {
    */
   export type UsersCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommentsWhereInput
+  }
+
+  /**
+   * UsersCountOutputType without action
+   */
+  export type UsersCountOutputTypeCountLandingCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: landingCommentsWhereInput
   }
 
 
@@ -18359,6 +18459,7 @@ export namespace Prisma {
     resource_id: string | null
     created_at: Date | null
     updated_at: Date | null
+    disabled: boolean | null
   }
 
   export type Sso_providersMaxAggregateOutputType = {
@@ -18366,6 +18467,7 @@ export namespace Prisma {
     resource_id: string | null
     created_at: Date | null
     updated_at: Date | null
+    disabled: boolean | null
   }
 
   export type Sso_providersCountAggregateOutputType = {
@@ -18373,6 +18475,7 @@ export namespace Prisma {
     resource_id: number
     created_at: number
     updated_at: number
+    disabled: number
     _all: number
   }
 
@@ -18382,6 +18485,7 @@ export namespace Prisma {
     resource_id?: true
     created_at?: true
     updated_at?: true
+    disabled?: true
   }
 
   export type Sso_providersMaxAggregateInputType = {
@@ -18389,6 +18493,7 @@ export namespace Prisma {
     resource_id?: true
     created_at?: true
     updated_at?: true
+    disabled?: true
   }
 
   export type Sso_providersCountAggregateInputType = {
@@ -18396,6 +18501,7 @@ export namespace Prisma {
     resource_id?: true
     created_at?: true
     updated_at?: true
+    disabled?: true
     _all?: true
   }
 
@@ -18476,6 +18582,7 @@ export namespace Prisma {
     resource_id: string | null
     created_at: Date | null
     updated_at: Date | null
+    disabled: boolean | null
     _count: Sso_providersCountAggregateOutputType | null
     _min: Sso_providersMinAggregateOutputType | null
     _max: Sso_providersMaxAggregateOutputType | null
@@ -18500,6 +18607,7 @@ export namespace Prisma {
     resource_id?: boolean
     created_at?: boolean
     updated_at?: boolean
+    disabled?: boolean
     saml_providers?: boolean | sso_providers$saml_providersArgs<ExtArgs>
     saml_relay_states?: boolean | sso_providers$saml_relay_statesArgs<ExtArgs>
     sso_domains?: boolean | sso_providers$sso_domainsArgs<ExtArgs>
@@ -18511,6 +18619,7 @@ export namespace Prisma {
     resource_id?: boolean
     created_at?: boolean
     updated_at?: boolean
+    disabled?: boolean
   }, ExtArgs["result"]["sso_providers"]>
 
   export type sso_providersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18518,6 +18627,7 @@ export namespace Prisma {
     resource_id?: boolean
     created_at?: boolean
     updated_at?: boolean
+    disabled?: boolean
   }, ExtArgs["result"]["sso_providers"]>
 
   export type sso_providersSelectScalar = {
@@ -18525,9 +18635,10 @@ export namespace Prisma {
     resource_id?: boolean
     created_at?: boolean
     updated_at?: boolean
+    disabled?: boolean
   }
 
-  export type sso_providersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "resource_id" | "created_at" | "updated_at", ExtArgs["result"]["sso_providers"]>
+  export type sso_providersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "resource_id" | "created_at" | "updated_at" | "disabled", ExtArgs["result"]["sso_providers"]>
   export type sso_providersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     saml_providers?: boolean | sso_providers$saml_providersArgs<ExtArgs>
     saml_relay_states?: boolean | sso_providers$saml_relay_statesArgs<ExtArgs>
@@ -18549,6 +18660,7 @@ export namespace Prisma {
       resource_id: string | null
       created_at: Date | null
       updated_at: Date | null
+      disabled: boolean | null
     }, ExtArgs["result"]["sso_providers"]>
     composites: {}
   }
@@ -18979,6 +19091,7 @@ export namespace Prisma {
     readonly resource_id: FieldRef<"sso_providers", 'String'>
     readonly created_at: FieldRef<"sso_providers", 'DateTime'>
     readonly updated_at: FieldRef<"sso_providers", 'DateTime'>
+    readonly disabled: FieldRef<"sso_providers", 'Boolean'>
   }
     
 
@@ -19893,6 +20006,7 @@ export namespace Prisma {
     sessions?: boolean | users$sessionsArgs<ExtArgs>
     Comments?: boolean | users$CommentsArgs<ExtArgs>
     ShoppingCart?: boolean | users$ShoppingCartArgs<ExtArgs>
+    landingComments?: boolean | users$landingCommentsArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["users"]>
 
@@ -20018,6 +20132,7 @@ export namespace Prisma {
     sessions?: boolean | users$sessionsArgs<ExtArgs>
     Comments?: boolean | users$CommentsArgs<ExtArgs>
     ShoppingCart?: boolean | users$ShoppingCartArgs<ExtArgs>
+    landingComments?: boolean | users$landingCommentsArgs<ExtArgs>
     _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type usersIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -20032,6 +20147,7 @@ export namespace Prisma {
       sessions: Prisma.$sessionsPayload<ExtArgs>[]
       Comments: Prisma.$CommentsPayload<ExtArgs>[]
       ShoppingCart: Prisma.$ShoppingCartPayload<ExtArgs> | null
+      landingComments: Prisma.$landingCommentsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       instance_id: string | null
@@ -20469,6 +20585,7 @@ export namespace Prisma {
     sessions<T extends users$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, users$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sessionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Comments<T extends users$CommentsArgs<ExtArgs> = {}>(args?: Subset<T, users$CommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ShoppingCart<T extends users$ShoppingCartArgs<ExtArgs> = {}>(args?: Subset<T, users$ShoppingCartArgs<ExtArgs>>): Prisma__ShoppingCartClient<$Result.GetResult<Prisma.$ShoppingCartPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    landingComments<T extends users$landingCommentsArgs<ExtArgs> = {}>(args?: Subset<T, users$landingCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21057,6 +21174,30 @@ export namespace Prisma {
      */
     include?: ShoppingCartInclude<ExtArgs> | null
     where?: ShoppingCartWhereInput
+  }
+
+  /**
+   * users.landingComments
+   */
+  export type users$landingCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsInclude<ExtArgs> | null
+    where?: landingCommentsWhereInput
+    orderBy?: landingCommentsOrderByWithRelationInput | landingCommentsOrderByWithRelationInput[]
+    cursor?: landingCommentsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LandingCommentsScalarFieldEnum | LandingCommentsScalarFieldEnum[]
   }
 
   /**
@@ -26713,6 +26854,1102 @@ export namespace Prisma {
 
 
   /**
+   * Model landingComments
+   */
+
+  export type AggregateLandingComments = {
+    _count: LandingCommentsCountAggregateOutputType | null
+    _avg: LandingCommentsAvgAggregateOutputType | null
+    _sum: LandingCommentsSumAggregateOutputType | null
+    _min: LandingCommentsMinAggregateOutputType | null
+    _max: LandingCommentsMaxAggregateOutputType | null
+  }
+
+  export type LandingCommentsAvgAggregateOutputType = {
+    id: number | null
+    rating: number | null
+  }
+
+  export type LandingCommentsSumAggregateOutputType = {
+    id: number | null
+    rating: number | null
+  }
+
+  export type LandingCommentsMinAggregateOutputType = {
+    id: number | null
+    created_at: Date | null
+    message: string | null
+    rating: number | null
+    userId: string | null
+  }
+
+  export type LandingCommentsMaxAggregateOutputType = {
+    id: number | null
+    created_at: Date | null
+    message: string | null
+    rating: number | null
+    userId: string | null
+  }
+
+  export type LandingCommentsCountAggregateOutputType = {
+    id: number
+    created_at: number
+    message: number
+    rating: number
+    userId: number
+    _all: number
+  }
+
+
+  export type LandingCommentsAvgAggregateInputType = {
+    id?: true
+    rating?: true
+  }
+
+  export type LandingCommentsSumAggregateInputType = {
+    id?: true
+    rating?: true
+  }
+
+  export type LandingCommentsMinAggregateInputType = {
+    id?: true
+    created_at?: true
+    message?: true
+    rating?: true
+    userId?: true
+  }
+
+  export type LandingCommentsMaxAggregateInputType = {
+    id?: true
+    created_at?: true
+    message?: true
+    rating?: true
+    userId?: true
+  }
+
+  export type LandingCommentsCountAggregateInputType = {
+    id?: true
+    created_at?: true
+    message?: true
+    rating?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type LandingCommentsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which landingComments to aggregate.
+     */
+    where?: landingCommentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of landingComments to fetch.
+     */
+    orderBy?: landingCommentsOrderByWithRelationInput | landingCommentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: landingCommentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` landingComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` landingComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned landingComments
+    **/
+    _count?: true | LandingCommentsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LandingCommentsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LandingCommentsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LandingCommentsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LandingCommentsMaxAggregateInputType
+  }
+
+  export type GetLandingCommentsAggregateType<T extends LandingCommentsAggregateArgs> = {
+        [P in keyof T & keyof AggregateLandingComments]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLandingComments[P]>
+      : GetScalarType<T[P], AggregateLandingComments[P]>
+  }
+
+
+
+
+  export type landingCommentsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: landingCommentsWhereInput
+    orderBy?: landingCommentsOrderByWithAggregationInput | landingCommentsOrderByWithAggregationInput[]
+    by: LandingCommentsScalarFieldEnum[] | LandingCommentsScalarFieldEnum
+    having?: landingCommentsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LandingCommentsCountAggregateInputType | true
+    _avg?: LandingCommentsAvgAggregateInputType
+    _sum?: LandingCommentsSumAggregateInputType
+    _min?: LandingCommentsMinAggregateInputType
+    _max?: LandingCommentsMaxAggregateInputType
+  }
+
+  export type LandingCommentsGroupByOutputType = {
+    id: number
+    created_at: Date
+    message: string
+    rating: number
+    userId: string
+    _count: LandingCommentsCountAggregateOutputType | null
+    _avg: LandingCommentsAvgAggregateOutputType | null
+    _sum: LandingCommentsSumAggregateOutputType | null
+    _min: LandingCommentsMinAggregateOutputType | null
+    _max: LandingCommentsMaxAggregateOutputType | null
+  }
+
+  type GetLandingCommentsGroupByPayload<T extends landingCommentsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LandingCommentsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LandingCommentsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LandingCommentsGroupByOutputType[P]>
+            : GetScalarType<T[P], LandingCommentsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type landingCommentsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    message?: boolean
+    rating?: boolean
+    userId?: boolean
+    user?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["landingComments"]>
+
+  export type landingCommentsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    message?: boolean
+    rating?: boolean
+    userId?: boolean
+    user?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["landingComments"]>
+
+  export type landingCommentsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    created_at?: boolean
+    message?: boolean
+    rating?: boolean
+    userId?: boolean
+    user?: boolean | usersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["landingComments"]>
+
+  export type landingCommentsSelectScalar = {
+    id?: boolean
+    created_at?: boolean
+    message?: boolean
+    rating?: boolean
+    userId?: boolean
+  }
+
+  export type landingCommentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_at" | "message" | "rating" | "userId", ExtArgs["result"]["landingComments"]>
+  export type landingCommentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | usersDefaultArgs<ExtArgs>
+  }
+  export type landingCommentsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | usersDefaultArgs<ExtArgs>
+  }
+  export type landingCommentsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | usersDefaultArgs<ExtArgs>
+  }
+
+  export type $landingCommentsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "landingComments"
+    objects: {
+      user: Prisma.$usersPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      created_at: Date
+      message: string
+      rating: number
+      userId: string
+    }, ExtArgs["result"]["landingComments"]>
+    composites: {}
+  }
+
+  type landingCommentsGetPayload<S extends boolean | null | undefined | landingCommentsDefaultArgs> = $Result.GetResult<Prisma.$landingCommentsPayload, S>
+
+  type landingCommentsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<landingCommentsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LandingCommentsCountAggregateInputType | true
+    }
+
+  export interface landingCommentsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['landingComments'], meta: { name: 'landingComments' } }
+    /**
+     * Find zero or one LandingComments that matches the filter.
+     * @param {landingCommentsFindUniqueArgs} args - Arguments to find a LandingComments
+     * @example
+     * // Get one LandingComments
+     * const landingComments = await prisma.landingComments.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends landingCommentsFindUniqueArgs>(args: SelectSubset<T, landingCommentsFindUniqueArgs<ExtArgs>>): Prisma__landingCommentsClient<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LandingComments that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {landingCommentsFindUniqueOrThrowArgs} args - Arguments to find a LandingComments
+     * @example
+     * // Get one LandingComments
+     * const landingComments = await prisma.landingComments.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends landingCommentsFindUniqueOrThrowArgs>(args: SelectSubset<T, landingCommentsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__landingCommentsClient<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LandingComments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {landingCommentsFindFirstArgs} args - Arguments to find a LandingComments
+     * @example
+     * // Get one LandingComments
+     * const landingComments = await prisma.landingComments.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends landingCommentsFindFirstArgs>(args?: SelectSubset<T, landingCommentsFindFirstArgs<ExtArgs>>): Prisma__landingCommentsClient<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LandingComments that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {landingCommentsFindFirstOrThrowArgs} args - Arguments to find a LandingComments
+     * @example
+     * // Get one LandingComments
+     * const landingComments = await prisma.landingComments.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends landingCommentsFindFirstOrThrowArgs>(args?: SelectSubset<T, landingCommentsFindFirstOrThrowArgs<ExtArgs>>): Prisma__landingCommentsClient<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LandingComments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {landingCommentsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LandingComments
+     * const landingComments = await prisma.landingComments.findMany()
+     * 
+     * // Get first 10 LandingComments
+     * const landingComments = await prisma.landingComments.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const landingCommentsWithIdOnly = await prisma.landingComments.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends landingCommentsFindManyArgs>(args?: SelectSubset<T, landingCommentsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LandingComments.
+     * @param {landingCommentsCreateArgs} args - Arguments to create a LandingComments.
+     * @example
+     * // Create one LandingComments
+     * const LandingComments = await prisma.landingComments.create({
+     *   data: {
+     *     // ... data to create a LandingComments
+     *   }
+     * })
+     * 
+     */
+    create<T extends landingCommentsCreateArgs>(args: SelectSubset<T, landingCommentsCreateArgs<ExtArgs>>): Prisma__landingCommentsClient<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LandingComments.
+     * @param {landingCommentsCreateManyArgs} args - Arguments to create many LandingComments.
+     * @example
+     * // Create many LandingComments
+     * const landingComments = await prisma.landingComments.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends landingCommentsCreateManyArgs>(args?: SelectSubset<T, landingCommentsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LandingComments and returns the data saved in the database.
+     * @param {landingCommentsCreateManyAndReturnArgs} args - Arguments to create many LandingComments.
+     * @example
+     * // Create many LandingComments
+     * const landingComments = await prisma.landingComments.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LandingComments and only return the `id`
+     * const landingCommentsWithIdOnly = await prisma.landingComments.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends landingCommentsCreateManyAndReturnArgs>(args?: SelectSubset<T, landingCommentsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LandingComments.
+     * @param {landingCommentsDeleteArgs} args - Arguments to delete one LandingComments.
+     * @example
+     * // Delete one LandingComments
+     * const LandingComments = await prisma.landingComments.delete({
+     *   where: {
+     *     // ... filter to delete one LandingComments
+     *   }
+     * })
+     * 
+     */
+    delete<T extends landingCommentsDeleteArgs>(args: SelectSubset<T, landingCommentsDeleteArgs<ExtArgs>>): Prisma__landingCommentsClient<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LandingComments.
+     * @param {landingCommentsUpdateArgs} args - Arguments to update one LandingComments.
+     * @example
+     * // Update one LandingComments
+     * const landingComments = await prisma.landingComments.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends landingCommentsUpdateArgs>(args: SelectSubset<T, landingCommentsUpdateArgs<ExtArgs>>): Prisma__landingCommentsClient<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LandingComments.
+     * @param {landingCommentsDeleteManyArgs} args - Arguments to filter LandingComments to delete.
+     * @example
+     * // Delete a few LandingComments
+     * const { count } = await prisma.landingComments.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends landingCommentsDeleteManyArgs>(args?: SelectSubset<T, landingCommentsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LandingComments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {landingCommentsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LandingComments
+     * const landingComments = await prisma.landingComments.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends landingCommentsUpdateManyArgs>(args: SelectSubset<T, landingCommentsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LandingComments and returns the data updated in the database.
+     * @param {landingCommentsUpdateManyAndReturnArgs} args - Arguments to update many LandingComments.
+     * @example
+     * // Update many LandingComments
+     * const landingComments = await prisma.landingComments.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LandingComments and only return the `id`
+     * const landingCommentsWithIdOnly = await prisma.landingComments.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends landingCommentsUpdateManyAndReturnArgs>(args: SelectSubset<T, landingCommentsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LandingComments.
+     * @param {landingCommentsUpsertArgs} args - Arguments to update or create a LandingComments.
+     * @example
+     * // Update or create a LandingComments
+     * const landingComments = await prisma.landingComments.upsert({
+     *   create: {
+     *     // ... data to create a LandingComments
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LandingComments we want to update
+     *   }
+     * })
+     */
+    upsert<T extends landingCommentsUpsertArgs>(args: SelectSubset<T, landingCommentsUpsertArgs<ExtArgs>>): Prisma__landingCommentsClient<$Result.GetResult<Prisma.$landingCommentsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LandingComments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {landingCommentsCountArgs} args - Arguments to filter LandingComments to count.
+     * @example
+     * // Count the number of LandingComments
+     * const count = await prisma.landingComments.count({
+     *   where: {
+     *     // ... the filter for the LandingComments we want to count
+     *   }
+     * })
+    **/
+    count<T extends landingCommentsCountArgs>(
+      args?: Subset<T, landingCommentsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LandingCommentsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LandingComments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LandingCommentsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LandingCommentsAggregateArgs>(args: Subset<T, LandingCommentsAggregateArgs>): Prisma.PrismaPromise<GetLandingCommentsAggregateType<T>>
+
+    /**
+     * Group by LandingComments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {landingCommentsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends landingCommentsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: landingCommentsGroupByArgs['orderBy'] }
+        : { orderBy?: landingCommentsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, landingCommentsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLandingCommentsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the landingComments model
+   */
+  readonly fields: landingCommentsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for landingComments.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__landingCommentsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends usersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usersDefaultArgs<ExtArgs>>): Prisma__usersClient<$Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the landingComments model
+   */
+  interface landingCommentsFieldRefs {
+    readonly id: FieldRef<"landingComments", 'Int'>
+    readonly created_at: FieldRef<"landingComments", 'DateTime'>
+    readonly message: FieldRef<"landingComments", 'String'>
+    readonly rating: FieldRef<"landingComments", 'Int'>
+    readonly userId: FieldRef<"landingComments", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * landingComments findUnique
+   */
+  export type landingCommentsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsInclude<ExtArgs> | null
+    /**
+     * Filter, which landingComments to fetch.
+     */
+    where: landingCommentsWhereUniqueInput
+  }
+
+  /**
+   * landingComments findUniqueOrThrow
+   */
+  export type landingCommentsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsInclude<ExtArgs> | null
+    /**
+     * Filter, which landingComments to fetch.
+     */
+    where: landingCommentsWhereUniqueInput
+  }
+
+  /**
+   * landingComments findFirst
+   */
+  export type landingCommentsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsInclude<ExtArgs> | null
+    /**
+     * Filter, which landingComments to fetch.
+     */
+    where?: landingCommentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of landingComments to fetch.
+     */
+    orderBy?: landingCommentsOrderByWithRelationInput | landingCommentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for landingComments.
+     */
+    cursor?: landingCommentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` landingComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` landingComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of landingComments.
+     */
+    distinct?: LandingCommentsScalarFieldEnum | LandingCommentsScalarFieldEnum[]
+  }
+
+  /**
+   * landingComments findFirstOrThrow
+   */
+  export type landingCommentsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsInclude<ExtArgs> | null
+    /**
+     * Filter, which landingComments to fetch.
+     */
+    where?: landingCommentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of landingComments to fetch.
+     */
+    orderBy?: landingCommentsOrderByWithRelationInput | landingCommentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for landingComments.
+     */
+    cursor?: landingCommentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` landingComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` landingComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of landingComments.
+     */
+    distinct?: LandingCommentsScalarFieldEnum | LandingCommentsScalarFieldEnum[]
+  }
+
+  /**
+   * landingComments findMany
+   */
+  export type landingCommentsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsInclude<ExtArgs> | null
+    /**
+     * Filter, which landingComments to fetch.
+     */
+    where?: landingCommentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of landingComments to fetch.
+     */
+    orderBy?: landingCommentsOrderByWithRelationInput | landingCommentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing landingComments.
+     */
+    cursor?: landingCommentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` landingComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` landingComments.
+     */
+    skip?: number
+    distinct?: LandingCommentsScalarFieldEnum | LandingCommentsScalarFieldEnum[]
+  }
+
+  /**
+   * landingComments create
+   */
+  export type landingCommentsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a landingComments.
+     */
+    data: XOR<landingCommentsCreateInput, landingCommentsUncheckedCreateInput>
+  }
+
+  /**
+   * landingComments createMany
+   */
+  export type landingCommentsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many landingComments.
+     */
+    data: landingCommentsCreateManyInput | landingCommentsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * landingComments createManyAndReturn
+   */
+  export type landingCommentsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * The data used to create many landingComments.
+     */
+    data: landingCommentsCreateManyInput | landingCommentsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * landingComments update
+   */
+  export type landingCommentsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a landingComments.
+     */
+    data: XOR<landingCommentsUpdateInput, landingCommentsUncheckedUpdateInput>
+    /**
+     * Choose, which landingComments to update.
+     */
+    where: landingCommentsWhereUniqueInput
+  }
+
+  /**
+   * landingComments updateMany
+   */
+  export type landingCommentsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update landingComments.
+     */
+    data: XOR<landingCommentsUpdateManyMutationInput, landingCommentsUncheckedUpdateManyInput>
+    /**
+     * Filter which landingComments to update
+     */
+    where?: landingCommentsWhereInput
+    /**
+     * Limit how many landingComments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * landingComments updateManyAndReturn
+   */
+  export type landingCommentsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * The data used to update landingComments.
+     */
+    data: XOR<landingCommentsUpdateManyMutationInput, landingCommentsUncheckedUpdateManyInput>
+    /**
+     * Filter which landingComments to update
+     */
+    where?: landingCommentsWhereInput
+    /**
+     * Limit how many landingComments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * landingComments upsert
+   */
+  export type landingCommentsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the landingComments to update in case it exists.
+     */
+    where: landingCommentsWhereUniqueInput
+    /**
+     * In case the landingComments found by the `where` argument doesn't exist, create a new landingComments with this data.
+     */
+    create: XOR<landingCommentsCreateInput, landingCommentsUncheckedCreateInput>
+    /**
+     * In case the landingComments was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<landingCommentsUpdateInput, landingCommentsUncheckedUpdateInput>
+  }
+
+  /**
+   * landingComments delete
+   */
+  export type landingCommentsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsInclude<ExtArgs> | null
+    /**
+     * Filter which landingComments to delete.
+     */
+    where: landingCommentsWhereUniqueInput
+  }
+
+  /**
+   * landingComments deleteMany
+   */
+  export type landingCommentsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which landingComments to delete
+     */
+    where?: landingCommentsWhereInput
+    /**
+     * Limit how many landingComments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * landingComments without action
+   */
+  export type landingCommentsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the landingComments
+     */
+    select?: landingCommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the landingComments
+     */
+    omit?: landingCommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: landingCommentsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -26919,7 +28156,8 @@ export namespace Prisma {
     id: 'id',
     resource_id: 'resource_id',
     created_at: 'created_at',
-    updated_at: 'updated_at'
+    updated_at: 'updated_at',
+    disabled: 'disabled'
   };
 
   export type Sso_providersScalarFieldEnum = (typeof Sso_providersScalarFieldEnum)[keyof typeof Sso_providersScalarFieldEnum]
@@ -27021,6 +28259,17 @@ export namespace Prisma {
   };
 
   export type ShoppingCartItemScalarFieldEnum = (typeof ShoppingCartItemScalarFieldEnum)[keyof typeof ShoppingCartItemScalarFieldEnum]
+
+
+  export const LandingCommentsScalarFieldEnum: {
+    id: 'id',
+    created_at: 'created_at',
+    message: 'message',
+    rating: 'rating',
+    userId: 'userId'
+  };
+
+  export type LandingCommentsScalarFieldEnum = (typeof LandingCommentsScalarFieldEnum)[keyof typeof LandingCommentsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -28216,6 +29465,7 @@ export namespace Prisma {
     resource_id?: StringNullableFilter<"sso_providers"> | string | null
     created_at?: DateTimeNullableFilter<"sso_providers"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"sso_providers"> | Date | string | null
+    disabled?: BoolNullableFilter<"sso_providers"> | boolean | null
     saml_providers?: Saml_providersListRelationFilter
     saml_relay_states?: Saml_relay_statesListRelationFilter
     sso_domains?: Sso_domainsListRelationFilter
@@ -28226,6 +29476,7 @@ export namespace Prisma {
     resource_id?: SortOrderInput | SortOrder
     created_at?: SortOrderInput | SortOrder
     updated_at?: SortOrderInput | SortOrder
+    disabled?: SortOrderInput | SortOrder
     saml_providers?: saml_providersOrderByRelationAggregateInput
     saml_relay_states?: saml_relay_statesOrderByRelationAggregateInput
     sso_domains?: sso_domainsOrderByRelationAggregateInput
@@ -28239,6 +29490,7 @@ export namespace Prisma {
     resource_id?: StringNullableFilter<"sso_providers"> | string | null
     created_at?: DateTimeNullableFilter<"sso_providers"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"sso_providers"> | Date | string | null
+    disabled?: BoolNullableFilter<"sso_providers"> | boolean | null
     saml_providers?: Saml_providersListRelationFilter
     saml_relay_states?: Saml_relay_statesListRelationFilter
     sso_domains?: Sso_domainsListRelationFilter
@@ -28249,6 +29501,7 @@ export namespace Prisma {
     resource_id?: SortOrderInput | SortOrder
     created_at?: SortOrderInput | SortOrder
     updated_at?: SortOrderInput | SortOrder
+    disabled?: SortOrderInput | SortOrder
     _count?: sso_providersCountOrderByAggregateInput
     _max?: sso_providersMaxOrderByAggregateInput
     _min?: sso_providersMinOrderByAggregateInput
@@ -28262,6 +29515,7 @@ export namespace Prisma {
     resource_id?: StringNullableWithAggregatesFilter<"sso_providers"> | string | null
     created_at?: DateTimeNullableWithAggregatesFilter<"sso_providers"> | Date | string | null
     updated_at?: DateTimeNullableWithAggregatesFilter<"sso_providers"> | Date | string | null
+    disabled?: BoolNullableWithAggregatesFilter<"sso_providers"> | boolean | null
   }
 
   export type usersWhereInput = {
@@ -28309,6 +29563,7 @@ export namespace Prisma {
     sessions?: SessionsListRelationFilter
     Comments?: CommentsListRelationFilter
     ShoppingCart?: XOR<ShoppingCartNullableScalarRelationFilter, ShoppingCartWhereInput> | null
+    landingComments?: LandingCommentsListRelationFilter
   }
 
   export type usersOrderByWithRelationInput = {
@@ -28353,6 +29608,7 @@ export namespace Prisma {
     sessions?: sessionsOrderByRelationAggregateInput
     Comments?: CommentsOrderByRelationAggregateInput
     ShoppingCart?: ShoppingCartOrderByWithRelationInput
+    landingComments?: landingCommentsOrderByRelationAggregateInput
   }
 
   export type usersWhereUniqueInput = Prisma.AtLeast<{
@@ -28400,6 +29656,7 @@ export namespace Prisma {
     sessions?: SessionsListRelationFilter
     Comments?: CommentsListRelationFilter
     ShoppingCart?: XOR<ShoppingCartNullableScalarRelationFilter, ShoppingCartWhereInput> | null
+    landingComments?: LandingCommentsListRelationFilter
   }, "id" | "phone">
 
   export type usersOrderByWithAggregationInput = {
@@ -28794,6 +30051,63 @@ export namespace Prisma {
     cartId?: IntWithAggregatesFilter<"ShoppingCartItem"> | number
     foodId?: IntWithAggregatesFilter<"ShoppingCartItem"> | number
     quantity?: IntWithAggregatesFilter<"ShoppingCartItem"> | number
+  }
+
+  export type landingCommentsWhereInput = {
+    AND?: landingCommentsWhereInput | landingCommentsWhereInput[]
+    OR?: landingCommentsWhereInput[]
+    NOT?: landingCommentsWhereInput | landingCommentsWhereInput[]
+    id?: IntFilter<"landingComments"> | number
+    created_at?: DateTimeFilter<"landingComments"> | Date | string
+    message?: StringFilter<"landingComments"> | string
+    rating?: IntFilter<"landingComments"> | number
+    userId?: UuidFilter<"landingComments"> | string
+    user?: XOR<UsersScalarRelationFilter, usersWhereInput>
+  }
+
+  export type landingCommentsOrderByWithRelationInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    message?: SortOrder
+    rating?: SortOrder
+    userId?: SortOrder
+    user?: usersOrderByWithRelationInput
+  }
+
+  export type landingCommentsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: landingCommentsWhereInput | landingCommentsWhereInput[]
+    OR?: landingCommentsWhereInput[]
+    NOT?: landingCommentsWhereInput | landingCommentsWhereInput[]
+    created_at?: DateTimeFilter<"landingComments"> | Date | string
+    message?: StringFilter<"landingComments"> | string
+    rating?: IntFilter<"landingComments"> | number
+    userId?: UuidFilter<"landingComments"> | string
+    user?: XOR<UsersScalarRelationFilter, usersWhereInput>
+  }, "id">
+
+  export type landingCommentsOrderByWithAggregationInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    message?: SortOrder
+    rating?: SortOrder
+    userId?: SortOrder
+    _count?: landingCommentsCountOrderByAggregateInput
+    _avg?: landingCommentsAvgOrderByAggregateInput
+    _max?: landingCommentsMaxOrderByAggregateInput
+    _min?: landingCommentsMinOrderByAggregateInput
+    _sum?: landingCommentsSumOrderByAggregateInput
+  }
+
+  export type landingCommentsScalarWhereWithAggregatesInput = {
+    AND?: landingCommentsScalarWhereWithAggregatesInput | landingCommentsScalarWhereWithAggregatesInput[]
+    OR?: landingCommentsScalarWhereWithAggregatesInput[]
+    NOT?: landingCommentsScalarWhereWithAggregatesInput | landingCommentsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"landingComments"> | number
+    created_at?: DateTimeWithAggregatesFilter<"landingComments"> | Date | string
+    message?: StringWithAggregatesFilter<"landingComments"> | string
+    rating?: IntWithAggregatesFilter<"landingComments"> | number
+    userId?: UuidWithAggregatesFilter<"landingComments"> | string
   }
 
   export type audit_log_entriesCreateInput = {
@@ -29835,6 +31149,7 @@ export namespace Prisma {
     resource_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
+    disabled?: boolean | null
     saml_providers?: saml_providersCreateNestedManyWithoutSso_providersInput
     saml_relay_states?: saml_relay_statesCreateNestedManyWithoutSso_providersInput
     sso_domains?: sso_domainsCreateNestedManyWithoutSso_providersInput
@@ -29845,6 +31160,7 @@ export namespace Prisma {
     resource_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
+    disabled?: boolean | null
     saml_providers?: saml_providersUncheckedCreateNestedManyWithoutSso_providersInput
     saml_relay_states?: saml_relay_statesUncheckedCreateNestedManyWithoutSso_providersInput
     sso_domains?: sso_domainsUncheckedCreateNestedManyWithoutSso_providersInput
@@ -29855,6 +31171,7 @@ export namespace Prisma {
     resource_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
     saml_providers?: saml_providersUpdateManyWithoutSso_providersNestedInput
     saml_relay_states?: saml_relay_statesUpdateManyWithoutSso_providersNestedInput
     sso_domains?: sso_domainsUpdateManyWithoutSso_providersNestedInput
@@ -29865,6 +31182,7 @@ export namespace Prisma {
     resource_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
     saml_providers?: saml_providersUncheckedUpdateManyWithoutSso_providersNestedInput
     saml_relay_states?: saml_relay_statesUncheckedUpdateManyWithoutSso_providersNestedInput
     sso_domains?: sso_domainsUncheckedUpdateManyWithoutSso_providersNestedInput
@@ -29875,6 +31193,7 @@ export namespace Prisma {
     resource_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
+    disabled?: boolean | null
   }
 
   export type sso_providersUpdateManyMutationInput = {
@@ -29882,6 +31201,7 @@ export namespace Prisma {
     resource_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type sso_providersUncheckedUpdateManyInput = {
@@ -29889,6 +31209,7 @@ export namespace Prisma {
     resource_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type usersCreateInput = {
@@ -29933,6 +31254,7 @@ export namespace Prisma {
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     Comments?: CommentsCreateNestedManyWithoutUserInput
     ShoppingCart?: ShoppingCartCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsCreateNestedManyWithoutUserInput
   }
 
   export type usersUncheckedCreateInput = {
@@ -29977,6 +31299,7 @@ export namespace Prisma {
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
     ShoppingCart?: ShoppingCartUncheckedCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type usersUpdateInput = {
@@ -30021,6 +31344,7 @@ export namespace Prisma {
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUpdateManyWithoutUserNestedInput
     ShoppingCart?: ShoppingCartUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUpdateManyWithoutUserNestedInput
   }
 
   export type usersUncheckedUpdateInput = {
@@ -30065,6 +31389,7 @@ export namespace Prisma {
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
     ShoppingCart?: ShoppingCartUncheckedUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type usersCreateManyInput = {
@@ -30469,6 +31794,58 @@ export namespace Prisma {
     cartId?: IntFieldUpdateOperationsInput | number
     foodId?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type landingCommentsCreateInput = {
+    created_at?: Date | string
+    message: string
+    rating: number
+    user: usersCreateNestedOneWithoutLandingCommentsInput
+  }
+
+  export type landingCommentsUncheckedCreateInput = {
+    id?: number
+    created_at?: Date | string
+    message: string
+    rating: number
+    userId: string
+  }
+
+  export type landingCommentsUpdateInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    user?: usersUpdateOneRequiredWithoutLandingCommentsNestedInput
+  }
+
+  export type landingCommentsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type landingCommentsCreateManyInput = {
+    id?: number
+    created_at?: Date | string
+    message: string
+    rating: number
+    userId: string
+  }
+
+  export type landingCommentsUpdateManyMutationInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type landingCommentsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UuidNullableFilter<$PrismaModel = never> = {
@@ -31423,6 +32800,7 @@ export namespace Prisma {
     resource_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    disabled?: SortOrder
   }
 
   export type sso_providersMaxOrderByAggregateInput = {
@@ -31430,6 +32808,7 @@ export namespace Prisma {
     resource_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    disabled?: SortOrder
   }
 
   export type sso_providersMinOrderByAggregateInput = {
@@ -31437,6 +32816,7 @@ export namespace Prisma {
     resource_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    disabled?: SortOrder
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -31490,6 +32870,12 @@ export namespace Prisma {
     isNot?: ShoppingCartWhereInput | null
   }
 
+  export type LandingCommentsListRelationFilter = {
+    every?: landingCommentsWhereInput
+    some?: landingCommentsWhereInput
+    none?: landingCommentsWhereInput
+  }
+
   export type identitiesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -31507,6 +32893,10 @@ export namespace Prisma {
   }
 
   export type CommentsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type landingCommentsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -31938,6 +33328,40 @@ export namespace Prisma {
     cartId?: SortOrder
     foodId?: SortOrder
     quantity?: SortOrder
+  }
+
+  export type landingCommentsCountOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    message?: SortOrder
+    rating?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type landingCommentsAvgOrderByAggregateInput = {
+    id?: SortOrder
+    rating?: SortOrder
+  }
+
+  export type landingCommentsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    message?: SortOrder
+    rating?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type landingCommentsMinOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    message?: SortOrder
+    rating?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type landingCommentsSumOrderByAggregateInput = {
+    id?: SortOrder
+    rating?: SortOrder
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -32481,6 +33905,13 @@ export namespace Prisma {
     connect?: ShoppingCartWhereUniqueInput
   }
 
+  export type landingCommentsCreateNestedManyWithoutUserInput = {
+    create?: XOR<landingCommentsCreateWithoutUserInput, landingCommentsUncheckedCreateWithoutUserInput> | landingCommentsCreateWithoutUserInput[] | landingCommentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: landingCommentsCreateOrConnectWithoutUserInput | landingCommentsCreateOrConnectWithoutUserInput[]
+    createMany?: landingCommentsCreateManyUserInputEnvelope
+    connect?: landingCommentsWhereUniqueInput | landingCommentsWhereUniqueInput[]
+  }
+
   export type identitiesUncheckedCreateNestedManyWithoutUsersInput = {
     create?: XOR<identitiesCreateWithoutUsersInput, identitiesUncheckedCreateWithoutUsersInput> | identitiesCreateWithoutUsersInput[] | identitiesUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: identitiesCreateOrConnectWithoutUsersInput | identitiesCreateOrConnectWithoutUsersInput[]
@@ -32520,6 +33951,13 @@ export namespace Prisma {
     create?: XOR<ShoppingCartCreateWithoutUsersInput, ShoppingCartUncheckedCreateWithoutUsersInput>
     connectOrCreate?: ShoppingCartCreateOrConnectWithoutUsersInput
     connect?: ShoppingCartWhereUniqueInput
+  }
+
+  export type landingCommentsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<landingCommentsCreateWithoutUserInput, landingCommentsUncheckedCreateWithoutUserInput> | landingCommentsCreateWithoutUserInput[] | landingCommentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: landingCommentsCreateOrConnectWithoutUserInput | landingCommentsCreateOrConnectWithoutUserInput[]
+    createMany?: landingCommentsCreateManyUserInputEnvelope
+    connect?: landingCommentsWhereUniqueInput | landingCommentsWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -32614,6 +34052,20 @@ export namespace Prisma {
     update?: XOR<XOR<ShoppingCartUpdateToOneWithWhereWithoutUsersInput, ShoppingCartUpdateWithoutUsersInput>, ShoppingCartUncheckedUpdateWithoutUsersInput>
   }
 
+  export type landingCommentsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<landingCommentsCreateWithoutUserInput, landingCommentsUncheckedCreateWithoutUserInput> | landingCommentsCreateWithoutUserInput[] | landingCommentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: landingCommentsCreateOrConnectWithoutUserInput | landingCommentsCreateOrConnectWithoutUserInput[]
+    upsert?: landingCommentsUpsertWithWhereUniqueWithoutUserInput | landingCommentsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: landingCommentsCreateManyUserInputEnvelope
+    set?: landingCommentsWhereUniqueInput | landingCommentsWhereUniqueInput[]
+    disconnect?: landingCommentsWhereUniqueInput | landingCommentsWhereUniqueInput[]
+    delete?: landingCommentsWhereUniqueInput | landingCommentsWhereUniqueInput[]
+    connect?: landingCommentsWhereUniqueInput | landingCommentsWhereUniqueInput[]
+    update?: landingCommentsUpdateWithWhereUniqueWithoutUserInput | landingCommentsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: landingCommentsUpdateManyWithWhereWithoutUserInput | landingCommentsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: landingCommentsScalarWhereInput | landingCommentsScalarWhereInput[]
+  }
+
   export type identitiesUncheckedUpdateManyWithoutUsersNestedInput = {
     create?: XOR<identitiesCreateWithoutUsersInput, identitiesUncheckedCreateWithoutUsersInput> | identitiesCreateWithoutUsersInput[] | identitiesUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: identitiesCreateOrConnectWithoutUsersInput | identitiesCreateOrConnectWithoutUsersInput[]
@@ -32692,6 +34144,20 @@ export namespace Prisma {
     delete?: ShoppingCartWhereInput | boolean
     connect?: ShoppingCartWhereUniqueInput
     update?: XOR<XOR<ShoppingCartUpdateToOneWithWhereWithoutUsersInput, ShoppingCartUpdateWithoutUsersInput>, ShoppingCartUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type landingCommentsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<landingCommentsCreateWithoutUserInput, landingCommentsUncheckedCreateWithoutUserInput> | landingCommentsCreateWithoutUserInput[] | landingCommentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: landingCommentsCreateOrConnectWithoutUserInput | landingCommentsCreateOrConnectWithoutUserInput[]
+    upsert?: landingCommentsUpsertWithWhereUniqueWithoutUserInput | landingCommentsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: landingCommentsCreateManyUserInputEnvelope
+    set?: landingCommentsWhereUniqueInput | landingCommentsWhereUniqueInput[]
+    disconnect?: landingCommentsWhereUniqueInput | landingCommentsWhereUniqueInput[]
+    delete?: landingCommentsWhereUniqueInput | landingCommentsWhereUniqueInput[]
+    connect?: landingCommentsWhereUniqueInput | landingCommentsWhereUniqueInput[]
+    update?: landingCommentsUpdateWithWhereUniqueWithoutUserInput | landingCommentsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: landingCommentsUpdateManyWithWhereWithoutUserInput | landingCommentsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: landingCommentsScalarWhereInput | landingCommentsScalarWhereInput[]
   }
 
   export type CommentsCreateNestedManyWithoutFoodInput = {
@@ -32964,6 +34430,20 @@ export namespace Prisma {
     upsert?: FoodUpsertWithoutShoppingCartItemInput
     connect?: FoodWhereUniqueInput
     update?: XOR<XOR<FoodUpdateToOneWithWhereWithoutShoppingCartItemInput, FoodUpdateWithoutShoppingCartItemInput>, FoodUncheckedUpdateWithoutShoppingCartItemInput>
+  }
+
+  export type usersCreateNestedOneWithoutLandingCommentsInput = {
+    create?: XOR<usersCreateWithoutLandingCommentsInput, usersUncheckedCreateWithoutLandingCommentsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutLandingCommentsInput
+    connect?: usersWhereUniqueInput
+  }
+
+  export type usersUpdateOneRequiredWithoutLandingCommentsNestedInput = {
+    create?: XOR<usersCreateWithoutLandingCommentsInput, usersUncheckedCreateWithoutLandingCommentsInput>
+    connectOrCreate?: usersCreateOrConnectWithoutLandingCommentsInput
+    upsert?: usersUpsertWithoutLandingCommentsInput
+    connect?: usersWhereUniqueInput
+    update?: XOR<XOR<usersUpdateToOneWithWhereWithoutLandingCommentsInput, usersUpdateWithoutLandingCommentsInput>, usersUncheckedUpdateWithoutLandingCommentsInput>
   }
 
   export type NestedUuidNullableFilter<$PrismaModel = never> = {
@@ -33522,6 +35002,7 @@ export namespace Prisma {
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     Comments?: CommentsCreateNestedManyWithoutUserInput
     ShoppingCart?: ShoppingCartCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsCreateNestedManyWithoutUserInput
   }
 
   export type usersUncheckedCreateWithoutIdentitiesInput = {
@@ -33565,6 +35046,7 @@ export namespace Prisma {
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
     ShoppingCart?: ShoppingCartUncheckedCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type usersCreateOrConnectWithoutIdentitiesInput = {
@@ -33624,6 +35106,7 @@ export namespace Prisma {
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUpdateManyWithoutUserNestedInput
     ShoppingCart?: ShoppingCartUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUpdateManyWithoutUserNestedInput
   }
 
   export type usersUncheckedUpdateWithoutIdentitiesInput = {
@@ -33667,6 +35150,7 @@ export namespace Prisma {
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
     ShoppingCart?: ShoppingCartUncheckedUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type sessionsCreateWithoutMfa_amr_claimsInput = {
@@ -33890,6 +35374,7 @@ export namespace Prisma {
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     Comments?: CommentsCreateNestedManyWithoutUserInput
     ShoppingCart?: ShoppingCartCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsCreateNestedManyWithoutUserInput
   }
 
   export type usersUncheckedCreateWithoutMfa_factorsInput = {
@@ -33933,6 +35418,7 @@ export namespace Prisma {
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
     ShoppingCart?: ShoppingCartUncheckedCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type usersCreateOrConnectWithoutMfa_factorsInput = {
@@ -34021,6 +35507,7 @@ export namespace Prisma {
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUpdateManyWithoutUserNestedInput
     ShoppingCart?: ShoppingCartUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUpdateManyWithoutUserNestedInput
   }
 
   export type usersUncheckedUpdateWithoutMfa_factorsInput = {
@@ -34064,6 +35551,7 @@ export namespace Prisma {
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
     ShoppingCart?: ShoppingCartUncheckedUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type usersCreateWithoutOne_time_tokensInput = {
@@ -34107,6 +35595,7 @@ export namespace Prisma {
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     Comments?: CommentsCreateNestedManyWithoutUserInput
     ShoppingCart?: ShoppingCartCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsCreateNestedManyWithoutUserInput
   }
 
   export type usersUncheckedCreateWithoutOne_time_tokensInput = {
@@ -34150,6 +35639,7 @@ export namespace Prisma {
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
     ShoppingCart?: ShoppingCartUncheckedCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type usersCreateOrConnectWithoutOne_time_tokensInput = {
@@ -34209,6 +35699,7 @@ export namespace Prisma {
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUpdateManyWithoutUserNestedInput
     ShoppingCart?: ShoppingCartUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUpdateManyWithoutUserNestedInput
   }
 
   export type usersUncheckedUpdateWithoutOne_time_tokensInput = {
@@ -34252,6 +35743,7 @@ export namespace Prisma {
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
     ShoppingCart?: ShoppingCartUncheckedUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type sessionsCreateWithoutRefresh_tokensInput = {
@@ -34335,6 +35827,7 @@ export namespace Prisma {
     resource_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
+    disabled?: boolean | null
     saml_relay_states?: saml_relay_statesCreateNestedManyWithoutSso_providersInput
     sso_domains?: sso_domainsCreateNestedManyWithoutSso_providersInput
   }
@@ -34344,6 +35837,7 @@ export namespace Prisma {
     resource_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
+    disabled?: boolean | null
     saml_relay_states?: saml_relay_statesUncheckedCreateNestedManyWithoutSso_providersInput
     sso_domains?: sso_domainsUncheckedCreateNestedManyWithoutSso_providersInput
   }
@@ -34369,6 +35863,7 @@ export namespace Prisma {
     resource_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
     saml_relay_states?: saml_relay_statesUpdateManyWithoutSso_providersNestedInput
     sso_domains?: sso_domainsUpdateManyWithoutSso_providersNestedInput
   }
@@ -34378,6 +35873,7 @@ export namespace Prisma {
     resource_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
     saml_relay_states?: saml_relay_statesUncheckedUpdateManyWithoutSso_providersNestedInput
     sso_domains?: sso_domainsUncheckedUpdateManyWithoutSso_providersNestedInput
   }
@@ -34422,6 +35918,7 @@ export namespace Prisma {
     resource_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
+    disabled?: boolean | null
     saml_providers?: saml_providersCreateNestedManyWithoutSso_providersInput
     sso_domains?: sso_domainsCreateNestedManyWithoutSso_providersInput
   }
@@ -34431,6 +35928,7 @@ export namespace Prisma {
     resource_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
+    disabled?: boolean | null
     saml_providers?: saml_providersUncheckedCreateNestedManyWithoutSso_providersInput
     sso_domains?: sso_domainsUncheckedCreateNestedManyWithoutSso_providersInput
   }
@@ -34497,6 +35995,7 @@ export namespace Prisma {
     resource_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
     saml_providers?: saml_providersUpdateManyWithoutSso_providersNestedInput
     sso_domains?: sso_domainsUpdateManyWithoutSso_providersNestedInput
   }
@@ -34506,6 +36005,7 @@ export namespace Prisma {
     resource_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
     saml_providers?: saml_providersUncheckedUpdateManyWithoutSso_providersNestedInput
     sso_domains?: sso_domainsUncheckedUpdateManyWithoutSso_providersNestedInput
   }
@@ -34607,6 +36107,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensCreateNestedManyWithoutUsersInput
     Comments?: CommentsCreateNestedManyWithoutUserInput
     ShoppingCart?: ShoppingCartCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsCreateNestedManyWithoutUserInput
   }
 
   export type usersUncheckedCreateWithoutSessionsInput = {
@@ -34650,6 +36151,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedCreateNestedManyWithoutUsersInput
     Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
     ShoppingCart?: ShoppingCartUncheckedCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type usersCreateOrConnectWithoutSessionsInput = {
@@ -34767,6 +36269,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUpdateManyWithoutUserNestedInput
     ShoppingCart?: ShoppingCartUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUpdateManyWithoutUserNestedInput
   }
 
   export type usersUncheckedUpdateWithoutSessionsInput = {
@@ -34810,6 +36313,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
     ShoppingCart?: ShoppingCartUncheckedUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type sso_providersCreateWithoutSso_domainsInput = {
@@ -34817,6 +36321,7 @@ export namespace Prisma {
     resource_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
+    disabled?: boolean | null
     saml_providers?: saml_providersCreateNestedManyWithoutSso_providersInput
     saml_relay_states?: saml_relay_statesCreateNestedManyWithoutSso_providersInput
   }
@@ -34826,6 +36331,7 @@ export namespace Prisma {
     resource_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
+    disabled?: boolean | null
     saml_providers?: saml_providersUncheckedCreateNestedManyWithoutSso_providersInput
     saml_relay_states?: saml_relay_statesUncheckedCreateNestedManyWithoutSso_providersInput
   }
@@ -34851,6 +36357,7 @@ export namespace Prisma {
     resource_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
     saml_providers?: saml_providersUpdateManyWithoutSso_providersNestedInput
     saml_relay_states?: saml_relay_statesUpdateManyWithoutSso_providersNestedInput
   }
@@ -34860,6 +36367,7 @@ export namespace Prisma {
     resource_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    disabled?: NullableBoolFieldUpdateOperationsInput | boolean | null
     saml_providers?: saml_providersUncheckedUpdateManyWithoutSso_providersNestedInput
     saml_relay_states?: saml_relay_statesUncheckedUpdateManyWithoutSso_providersNestedInput
   }
@@ -35203,6 +36711,29 @@ export namespace Prisma {
     create: XOR<ShoppingCartCreateWithoutUsersInput, ShoppingCartUncheckedCreateWithoutUsersInput>
   }
 
+  export type landingCommentsCreateWithoutUserInput = {
+    created_at?: Date | string
+    message: string
+    rating: number
+  }
+
+  export type landingCommentsUncheckedCreateWithoutUserInput = {
+    id?: number
+    created_at?: Date | string
+    message: string
+    rating: number
+  }
+
+  export type landingCommentsCreateOrConnectWithoutUserInput = {
+    where: landingCommentsWhereUniqueInput
+    create: XOR<landingCommentsCreateWithoutUserInput, landingCommentsUncheckedCreateWithoutUserInput>
+  }
+
+  export type landingCommentsCreateManyUserInputEnvelope = {
+    data: landingCommentsCreateManyUserInput | landingCommentsCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type identitiesUpsertWithWhereUniqueWithoutUsersInput = {
     where: identitiesWhereUniqueInput
     update: XOR<identitiesUpdateWithoutUsersInput, identitiesUncheckedUpdateWithoutUsersInput>
@@ -35376,6 +36907,33 @@ export namespace Prisma {
   export type ShoppingCartUncheckedUpdateWithoutUsersInput = {
     id?: IntFieldUpdateOperationsInput | number
     ShoppingCartItem?: ShoppingCartItemUncheckedUpdateManyWithoutShoppingCartNestedInput
+  }
+
+  export type landingCommentsUpsertWithWhereUniqueWithoutUserInput = {
+    where: landingCommentsWhereUniqueInput
+    update: XOR<landingCommentsUpdateWithoutUserInput, landingCommentsUncheckedUpdateWithoutUserInput>
+    create: XOR<landingCommentsCreateWithoutUserInput, landingCommentsUncheckedCreateWithoutUserInput>
+  }
+
+  export type landingCommentsUpdateWithWhereUniqueWithoutUserInput = {
+    where: landingCommentsWhereUniqueInput
+    data: XOR<landingCommentsUpdateWithoutUserInput, landingCommentsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type landingCommentsUpdateManyWithWhereWithoutUserInput = {
+    where: landingCommentsScalarWhereInput
+    data: XOR<landingCommentsUpdateManyMutationInput, landingCommentsUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type landingCommentsScalarWhereInput = {
+    AND?: landingCommentsScalarWhereInput | landingCommentsScalarWhereInput[]
+    OR?: landingCommentsScalarWhereInput[]
+    NOT?: landingCommentsScalarWhereInput | landingCommentsScalarWhereInput[]
+    id?: IntFilter<"landingComments"> | number
+    created_at?: DateTimeFilter<"landingComments"> | Date | string
+    message?: StringFilter<"landingComments"> | string
+    rating?: IntFilter<"landingComments"> | number
+    userId?: UuidFilter<"landingComments"> | string
   }
 
   export type CommentsCreateWithoutFoodInput = {
@@ -35654,6 +37212,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensCreateNestedManyWithoutUsersInput
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     ShoppingCart?: ShoppingCartCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsCreateNestedManyWithoutUserInput
   }
 
   export type usersUncheckedCreateWithoutCommentsInput = {
@@ -35697,6 +37256,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedCreateNestedManyWithoutUsersInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     ShoppingCart?: ShoppingCartUncheckedCreateNestedOneWithoutUsersInput
+    landingComments?: landingCommentsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type usersCreateOrConnectWithoutCommentsInput = {
@@ -35794,6 +37354,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     ShoppingCart?: ShoppingCartUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUpdateManyWithoutUserNestedInput
   }
 
   export type usersUncheckedUpdateWithoutCommentsInput = {
@@ -35837,6 +37398,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     ShoppingCart?: ShoppingCartUncheckedUpdateOneWithoutUsersNestedInput
+    landingComments?: landingCommentsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type usersCreateWithoutShoppingCartInput = {
@@ -35880,6 +37442,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensCreateNestedManyWithoutUsersInput
     sessions?: sessionsCreateNestedManyWithoutUsersInput
     Comments?: CommentsCreateNestedManyWithoutUserInput
+    landingComments?: landingCommentsCreateNestedManyWithoutUserInput
   }
 
   export type usersUncheckedCreateWithoutShoppingCartInput = {
@@ -35923,6 +37486,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedCreateNestedManyWithoutUsersInput
     sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
     Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
+    landingComments?: landingCommentsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type usersCreateOrConnectWithoutShoppingCartInput = {
@@ -36003,6 +37567,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUpdateManyWithoutUserNestedInput
+    landingComments?: landingCommentsUpdateManyWithoutUserNestedInput
   }
 
   export type usersUncheckedUpdateWithoutShoppingCartInput = {
@@ -36046,6 +37611,7 @@ export namespace Prisma {
     one_time_tokens?: one_time_tokensUncheckedUpdateManyWithoutUsersNestedInput
     sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
     Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
+    landingComments?: landingCommentsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ShoppingCartItemUpsertWithWhereUniqueWithoutShoppingCartInput = {
@@ -36166,6 +37732,198 @@ export namespace Prisma {
     shopId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentsUncheckedUpdateManyWithoutFoodNestedInput
+  }
+
+  export type usersCreateWithoutLandingCommentsInput = {
+    instance_id?: string | null
+    id: string
+    aud?: string | null
+    role?: string | null
+    email?: string | null
+    encrypted_password?: string | null
+    email_confirmed_at?: Date | string | null
+    invited_at?: Date | string | null
+    confirmation_token?: string | null
+    confirmation_sent_at?: Date | string | null
+    recovery_token?: string | null
+    recovery_sent_at?: Date | string | null
+    email_change_token_new?: string | null
+    email_change?: string | null
+    email_change_sent_at?: Date | string | null
+    last_sign_in_at?: Date | string | null
+    raw_app_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    raw_user_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    is_super_admin?: boolean | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    phone?: string | null
+    phone_confirmed_at?: Date | string | null
+    phone_change?: string | null
+    phone_change_token?: string | null
+    phone_change_sent_at?: Date | string | null
+    confirmed_at?: Date | string | null
+    email_change_token_current?: string | null
+    email_change_confirm_status?: number | null
+    banned_until?: Date | string | null
+    reauthentication_token?: string | null
+    reauthentication_sent_at?: Date | string | null
+    is_sso_user?: boolean
+    deleted_at?: Date | string | null
+    is_anonymous?: boolean
+    identities?: identitiesCreateNestedManyWithoutUsersInput
+    mfa_factors?: mfa_factorsCreateNestedManyWithoutUsersInput
+    one_time_tokens?: one_time_tokensCreateNestedManyWithoutUsersInput
+    sessions?: sessionsCreateNestedManyWithoutUsersInput
+    Comments?: CommentsCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartCreateNestedOneWithoutUsersInput
+  }
+
+  export type usersUncheckedCreateWithoutLandingCommentsInput = {
+    instance_id?: string | null
+    id: string
+    aud?: string | null
+    role?: string | null
+    email?: string | null
+    encrypted_password?: string | null
+    email_confirmed_at?: Date | string | null
+    invited_at?: Date | string | null
+    confirmation_token?: string | null
+    confirmation_sent_at?: Date | string | null
+    recovery_token?: string | null
+    recovery_sent_at?: Date | string | null
+    email_change_token_new?: string | null
+    email_change?: string | null
+    email_change_sent_at?: Date | string | null
+    last_sign_in_at?: Date | string | null
+    raw_app_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    raw_user_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    is_super_admin?: boolean | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    phone?: string | null
+    phone_confirmed_at?: Date | string | null
+    phone_change?: string | null
+    phone_change_token?: string | null
+    phone_change_sent_at?: Date | string | null
+    confirmed_at?: Date | string | null
+    email_change_token_current?: string | null
+    email_change_confirm_status?: number | null
+    banned_until?: Date | string | null
+    reauthentication_token?: string | null
+    reauthentication_sent_at?: Date | string | null
+    is_sso_user?: boolean
+    deleted_at?: Date | string | null
+    is_anonymous?: boolean
+    identities?: identitiesUncheckedCreateNestedManyWithoutUsersInput
+    mfa_factors?: mfa_factorsUncheckedCreateNestedManyWithoutUsersInput
+    one_time_tokens?: one_time_tokensUncheckedCreateNestedManyWithoutUsersInput
+    sessions?: sessionsUncheckedCreateNestedManyWithoutUsersInput
+    Comments?: CommentsUncheckedCreateNestedManyWithoutUserInput
+    ShoppingCart?: ShoppingCartUncheckedCreateNestedOneWithoutUsersInput
+  }
+
+  export type usersCreateOrConnectWithoutLandingCommentsInput = {
+    where: usersWhereUniqueInput
+    create: XOR<usersCreateWithoutLandingCommentsInput, usersUncheckedCreateWithoutLandingCommentsInput>
+  }
+
+  export type usersUpsertWithoutLandingCommentsInput = {
+    update: XOR<usersUpdateWithoutLandingCommentsInput, usersUncheckedUpdateWithoutLandingCommentsInput>
+    create: XOR<usersCreateWithoutLandingCommentsInput, usersUncheckedCreateWithoutLandingCommentsInput>
+    where?: usersWhereInput
+  }
+
+  export type usersUpdateToOneWithWhereWithoutLandingCommentsInput = {
+    where?: usersWhereInput
+    data: XOR<usersUpdateWithoutLandingCommentsInput, usersUncheckedUpdateWithoutLandingCommentsInput>
+  }
+
+  export type usersUpdateWithoutLandingCommentsInput = {
+    instance_id?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    aud?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    encrypted_password?: NullableStringFieldUpdateOperationsInput | string | null
+    email_confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invited_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    confirmation_token?: NullableStringFieldUpdateOperationsInput | string | null
+    confirmation_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    recovery_token?: NullableStringFieldUpdateOperationsInput | string | null
+    recovery_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_change_token_new?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_sign_in_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    raw_app_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    raw_user_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    is_super_admin?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone_change?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_change_token?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_change_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_change_token_current?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change_confirm_status?: NullableIntFieldUpdateOperationsInput | number | null
+    banned_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reauthentication_token?: NullableStringFieldUpdateOperationsInput | string | null
+    reauthentication_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_sso_user?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_anonymous?: BoolFieldUpdateOperationsInput | boolean
+    identities?: identitiesUpdateManyWithoutUsersNestedInput
+    mfa_factors?: mfa_factorsUpdateManyWithoutUsersNestedInput
+    one_time_tokens?: one_time_tokensUpdateManyWithoutUsersNestedInput
+    sessions?: sessionsUpdateManyWithoutUsersNestedInput
+    Comments?: CommentsUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUpdateOneWithoutUsersNestedInput
+  }
+
+  export type usersUncheckedUpdateWithoutLandingCommentsInput = {
+    instance_id?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    aud?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    encrypted_password?: NullableStringFieldUpdateOperationsInput | string | null
+    email_confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invited_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    confirmation_token?: NullableStringFieldUpdateOperationsInput | string | null
+    confirmation_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    recovery_token?: NullableStringFieldUpdateOperationsInput | string | null
+    recovery_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_change_token_new?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_sign_in_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    raw_app_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    raw_user_meta_data?: NullableJsonNullValueInput | InputJsonValue
+    is_super_admin?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone_change?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_change_token?: NullableStringFieldUpdateOperationsInput | string | null
+    phone_change_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    confirmed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    email_change_token_current?: NullableStringFieldUpdateOperationsInput | string | null
+    email_change_confirm_status?: NullableIntFieldUpdateOperationsInput | number | null
+    banned_until?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reauthentication_token?: NullableStringFieldUpdateOperationsInput | string | null
+    reauthentication_sent_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_sso_user?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_anonymous?: BoolFieldUpdateOperationsInput | boolean
+    identities?: identitiesUncheckedUpdateManyWithoutUsersNestedInput
+    mfa_factors?: mfa_factorsUncheckedUpdateManyWithoutUsersNestedInput
+    one_time_tokens?: one_time_tokensUncheckedUpdateManyWithoutUsersNestedInput
+    sessions?: sessionsUncheckedUpdateManyWithoutUsersNestedInput
+    Comments?: CommentsUncheckedUpdateManyWithoutUserNestedInput
+    ShoppingCart?: ShoppingCartUncheckedUpdateOneWithoutUsersNestedInput
   }
 
   export type saml_relay_statesCreateManyFlow_stateInput = {
@@ -36483,6 +38241,13 @@ export namespace Prisma {
     created_at?: Date | string
   }
 
+  export type landingCommentsCreateManyUserInput = {
+    id?: number
+    created_at?: Date | string
+    message: string
+    rating: number
+  }
+
   export type identitiesUpdateWithoutUsersInput = {
     provider_id?: StringFieldUpdateOperationsInput | string
     identity_data?: JsonNullValueInput | InputJsonValue
@@ -36651,6 +38416,26 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     foodId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type landingCommentsUpdateWithoutUserInput = {
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type landingCommentsUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type landingCommentsUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
   }
 
   export type CommentsCreateManyFoodInput = {
