@@ -114,7 +114,7 @@ export default function FoodCard({ food }: FoodCardProps) {
 
         {/* Shop & Price */}
         <div className="flex justify-between items-center pt-3">
-          <Link href={`/shop/${food.shop.id}`} className="flex items-center gap-2 group">
+          <Link href={`/shops/${food.shop.id}`} className="flex items-center gap-2 group">
             <Image
               src={food.shop.image}
               alt={food.shop.name}
@@ -151,3 +151,4 @@ export default function FoodCard({ food }: FoodCardProps) {
     </div>
   );
 }
+
