@@ -3,15 +3,14 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { IoFastFood } from "react-icons/io5";
-import { LogInIcon } from "lucide-react";
-import ButtonIcon from "../ui/buttonIcon";
+import Logo from "../../../public/Image/logo.png";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { ThemeToggle } from "./ThemeToggle";
 import UserProfile from "./UserProfile";
 import UserMenuItems from "../UserMenuItems";
 import ShoppingCartPopover from "../ShoppingCartPopover";
+import Image from "next/image";
 
 export default function HeaderClient({ email }: { email: string }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +18,7 @@ export default function HeaderClient({ email }: { email: string }) {
 
     const navItems = [
         { title: "Home", href: "/" },
-        { title: "Order Foods", href: "/foods" },
+        { title: "Foods", href: "/foods" },
         { title: "Shops", href: "/shops" },
     ];
 
@@ -27,9 +26,9 @@ export default function HeaderClient({ email }: { email: string }) {
         <header className="sticky top-0 z-50 w-full flex justify-center border-b bg-background/95 backdrop-blur px-4">
             <div className="w-full flex h-16 items-center justify-between md:px-10">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2">
-                    <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                        <IoFastFood className="w-6 h-6 text-white" />
+                <Link href="/" className="hidden md:flex items-center gap-2">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+                        <Image className="w-10 h-10 rounded-lg" alt="" src={Logo}></Image>
                     </div>
                     <span className="hidden sm:inline-block font-bold text-xl">Foodexy</span>
                 </Link>
@@ -48,9 +47,9 @@ export default function HeaderClient({ email }: { email: string }) {
                     ))}
                 </nav>
 
+
                 {/* Right */}
-                <div className="hidden md:flex items-center gap-4">
-                    <ThemeToggle />
+                <div className="flex items-center gap-4">
                     <Popover>
                         <PopoverTrigger>
                             <Tooltip>
@@ -76,11 +75,13 @@ export default function HeaderClient({ email }: { email: string }) {
                             </div>
                         </PopoverContent>
                     </Popover>
+                    <ThemeToggle className="hidden md:flex" />
                 </div>
+
 
                 {/* Mobile Button */}
                 <button
-                    className="md:hidden p-2 rounded-md hover:text-primary"
+                    className="md:hidden cursor-pointer p-2 rounded-md hover:text-primary"
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? "✖" : "☰"}
@@ -89,17 +90,22 @@ export default function HeaderClient({ email }: { email: string }) {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden bg-background/95 backdrop-blur border-t">
-                    <div className="container py-4 flex flex-col gap-4">
+                <div className="absolute top-full left-0 w-full bg-background/95 backdrop-blur border-t z-40">
+                    <div className="container py-4 px-4 flex flex-col gap-4">
                         {navItems.map((item) => (
-                            <Link key={item.href} href={item.href} className="px-4 py-2 border-b">
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className="px-5 py-2 border-b"
+                            >
                                 {item.title}
                             </Link>
                         ))}
-                        <ThemeToggle />
+                        <ThemeToggle className="ml-[11px]"/>
                     </div>
                 </div>
             )}
+
         </header>
     );
 }

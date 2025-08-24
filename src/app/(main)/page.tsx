@@ -54,48 +54,50 @@ export default async function HomePage() {
   return (
     <main className="bg-background text-foreground">
       <section className="relative min-h-screen flex items-center justify-center text-card-foreground px-6 sm:px-12 overflow-hidden isolate">
-
         <div
           className="absolute inset-0 bg-center bg-cover filter blur-[20px] scale-110"
           style={{ backgroundImage: "url('/Image/HeroSection.png')" }}
           aria-hidden="true"
         />
-
         <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
-
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-
-          <h1 className="text-5xl font-extrabold mb-4 leading-tight drop-shadow-lg">
-            <span className="text-secondary text-7xl">Foodexy</span>
-            <br />
-            <span className="text-white">Bringing Delicious Meals To Your Doorstep</span>
+          <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight drop-shadow-lg">
+            <span className="block text-secondary text-6xl max-[360px]:mb-2 md:text-7xl lg:text-8xl">
+              Foodexy
+            </span>
+            <span className="block text-white">
+              Bringing Delicious Meals To Your Doorstep
+            </span>
           </h1>
 
           <p className="text-lg opacity-80 max-w-xl mx-auto mb-10 drop-shadow-md text-white">
             Enjoy fast, fresh, and tasty food delivered in under 30 minutes.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button className="bg-secondary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-primary transition duration-300 min-w-[180px]">
+          <div className="flex flex-row gap-6 justify-center max-[360px]:flex-col">
+            <button className="bg-secondary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-primary transition duration-300 min-w-[150px] md:min-w-[200px]">
               Order Now
             </button>
-            <button className="border-2 border-secondary text-secondary px-8 py-3 rounded-full font-semibold hover:bg-secondary hover:text-white transition duration-300 min-w-[180px]">
+            <button className="border-2 border-secondary text-secondary px-8 py-3 rounded-full font-semibold hover:bg-secondary hover:text-white transition duration-300 min-w-[150px] md:min-w-[200px]">
               View Menu
             </button>
           </div>
 
-          <div className="mt-16 grid grid-cols-3 gap-6 text-sm text-white select-none drop-shadow-sm">
+          <div className="mt-10 sm:mt-12 md:mt-16 grid min-[500px]:grid-cols-3 gap-4 sm:gap-6 md:gap-8 text-sm text-white select-none drop-shadow-sm">
             {[
               { icon: <FaStar />, text: "Rated 4.9 / 1000+ reviews" },
               { icon: <FaClock />, text: "24/7 Fast Delivery" },
-              { icon: <FaShieldAlt />, text: "100% Quality Guarantee" }
+              { icon: <FaShieldAlt />, text: "100% Quality Guarantee" },
             ].map(({ icon, text }, i) => (
-              <div key={i} className="flex items-center gap-2 justify-center">
-                <div className="text-secondary">{icon}</div>
-                <span>{text}</span>
+              <div
+                key={i}
+                className="flex mx-auto w-auto items-center gap-1 sm:gap-2 md:gap-3 justify-start sm:justify-center"
+              >
+                <div className="text-secondary text-lg sm:text-xl">{icon}</div>
+                <span className="text-left">{text}</span>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -170,7 +172,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <ReviewSlider reviews={reviews} />
+      <ReviewSlider />
     </main>
   );
 

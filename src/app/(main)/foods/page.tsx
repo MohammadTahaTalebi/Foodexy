@@ -5,7 +5,7 @@ import FoodCardSkeleton from "@/components/common/FoodCardSkeleton";
 import { getAllFoods } from "@/lib/actions/foods.action";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Food } from "../../../../prisma/src/generated/prisma";
+import { Food, Restaurants } from "../../../../prisma/src/generated/prisma";
 
 const categoryOptions = [
   { label: "All", value: "ALL" },
@@ -29,7 +29,7 @@ export default function FoodsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [foods, setFoods] = useState<(Food & { shop: any })[]>([]);
+const [foods, setFoods] = useState<(Food & { shop?: Restaurants })[]>([]);
   const [loading, setLoading] = useState(true);
 
   const [search, setSearch] = useState(searchParams.get("search") || "");

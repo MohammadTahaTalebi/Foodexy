@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Foodexy",
   description: "Bringing Delicious Meals To Your Doorstep",
+  icons: {
+    icon: "/Image/logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -36,7 +39,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} />
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+          />
         </ThemeProvider>
       </body>
     </html>

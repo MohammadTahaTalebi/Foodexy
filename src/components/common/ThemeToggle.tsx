@@ -4,7 +4,7 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-export function ThemeToggle() {
+export function ThemeToggle({className}:{className:string}) {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   useEffect(() => {
@@ -28,7 +28,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="rounded-md p-2 cursor-pointer"
+      className={`rounded-md p-2 cursor-pointer ${className}`}
     >
       <Sun className={`h-5 w-5 transition-all ${theme === "dark" ? "" : "hidden"}`} />
       <Moon className={`h-5 w-5 transition-all ${theme === "dark" ? "hidden" : ""}`} />

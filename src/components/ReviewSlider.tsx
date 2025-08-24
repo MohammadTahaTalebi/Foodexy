@@ -66,18 +66,17 @@ export default function ReviewSlider() {
 
   return (
     <section className="py-16 px-6 md:px-20">
-      <div className="flex justify-between">
-        <span />
+      <div className="flex md:justify-between flex-col flex-wrap justify-center md:flex-row">
+        <span className="w-[10%] md:flex hidden"/>
         <h2 className="text-3xl font-extrabold text-center mb-4 text-card-foreground">
           What Our Customers Say
         </h2>
-        <div className="text-center mb-8">
+        <div className="text-center mb-3 md:mb-8">
           <button
             onClick={() => setModalOpen(true)}
-            className="flex items-center gap-2 bg-primary 
-                 text-background px-5 py-2.5 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
-            <FaRegCommentDots className="text-lg" />
-            <span className="font-medium">Add Comment</span>
+            className="flex items-center gap-2 bg-primary mx-auto text-background px-5 py-2.5 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+            <FaRegCommentDots className="text-lg text-white" />
+            <span className=" text-white font-bold">Add Comment</span>
           </button>
         </div>
       </div>
