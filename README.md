@@ -68,17 +68,12 @@ Foodexy is a **demo** food ordering platform demonstrating:
 </p>
 
 <p>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framer/framer-original.svg" width="18" height="18" alt="Framer Motion"/> <strong>Motion</strong><br/>
-  Choreographed entrance/exit animations, reduced-motion friendly.
-</p>
-
-<p>
   <img src="https://raw.githubusercontent.com/nolimits4web/swiper-website/master/src/img/logo.svg" width="18" height="18" alt="Swiper"/> <strong>Carousels</strong><br/>
   Hero/menu sliders with accessibility and touch support.
 </p>
 
 <p>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" width="18" height="18" alt="TailwindCSS"/> <strong>Styling</strong><br/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" width="18" height="18" alt="TailwindCSS"/> <strong>Styling</strong><br/>
   TailwindCSS + shadcn/ui components, utility-first with design tokens.
 </p>
 
